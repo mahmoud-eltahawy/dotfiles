@@ -1,0 +1,439 @@
+#+title: Emacs Config
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.config/doom/config.el :mkdirp yes
+#+STARTUP:overview
+#+AUTHOR :Mahmoud ElTahawy
+* General
+** theme and backaup
+#+begin_src emacs-lisp
+(defmacro comment (&rest _)
+  "Comment out one or more s-expressions."
+  nil)
+ (setq doom-theme 'doom-moonlight)
+;; Backup Config
+(setq backup-directory-alist `(("." . "~/.emacs-tmp/")))
+(setq auto-save-file-name-transforms `((".*" "~/.emacs-tmp/" t)))
+#+END_SRC
+** format
+#+begin_src emacs-lisp
+(setq initial-scratch-message nil)
+;; Auto revert-mode
+(global-auto-revert-mode t)
+
+(if IS-MAC
+    (setq insert-directory-program "gls" dired-use-ls-dired t))
+
+(setq +format-on-save-enabled-modes t)
+
+(setq c-basic-indent 2)
+(setq c-default-style "linux")
+(setq tab-width 2)
+(setq-default indent-tabs-mode nil)
+
+(set-face-attribute 'default nil :height 100)
+
+(setq-default truncate-lines 1)
+
+(setq whitespace-line-column 100
+      whitespace-style
+      '(face trailing lines-tail))
+
+(setq-default fill-column 80)
+(auto-fill-mode 1)
+
+;; autofill mode for text-mode
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; turn on whitespace mode
+(global-whitespace-mode t)
+;; but not in org
+(setq whitespace-global-modes '(not org-mode ink-mode))
+;; turn on whitespace cleanup
+(add-hook! 'before-save-hook 'whitespace-cleanup)
+
+;; eval max len
+(setq eval-expression-print-length 200)
+
+
+;; handle very long lines (so-long)
+(defun doom-buffer-has-long-lines-p ()
+  "Fix for dired sometimes asking for comment syntax."
+  (when comment-use-syntax
+    (so-long-detected-long-line-p)))
+
+(setq so-long-predicate #'doom-buffer-has-long-lines-p)
+
+
+(after! dtrt-indent
+  (add-to-list 'dtrt-indent-hook-mapping-list '(typescript-tsx-mode javascript typescript-indent-level))
+  (add-to-list 'dtrt-indent-hook-mapping-list '(typescript-mode javascript typescript-indent-level)))
+
+#+END_SRC
+** dir-locals
+#+begin_src emacs-lisp
+;; from https://emacs.stackexchange.com/questions/13080/reloading-directory-local-variables
+(defun my-reload-dir-locals-for-current-buffer ()
+  "Reload dir locals for the current buffer."
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+
+(defun my-reload-dir-locals-for-all-buffer-in-this-directory ()
+  "For every buffer with the same `default-directory` as the current buffer's, reload dir-locals."
+  (interactive)
+  (let ((dir default-directory))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (equal default-directory dir))
+        (my-reload-dir-locals-for-current-buffer)))))
+
+
+#+END_SRC
+** modeline and others
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+(use-package! doom-modeline
+  :config
+  (doom-modeline-def-modeline 'main
+    '(bar workspace-name window-number modals matches checker buffer-info
+          remote-host buffer-position word-count parrot selection-info)
+    '(objed-state misc-info persp-name battery grip irc
+                  mu4e gnus github debug lsp minor-modes input-method
+                  indent-info buffer-encoding major-mode process vcs)))
+
+(defadvice! kill-aggressive-indent-timers (l r &rest _)
+  :override #'aggressive-indent--keep-track-of-changes
+  (when aggressive-indent-mode
+    (push (list l r) aggressive-indent--changed-list)
+    (when (timerp aggressive-indent--idle-timer)
+      (cancel-timer aggressive-indent--idle-timer))
+    (setq aggressive-indent--idle-timer
+          (run-with-idle-timer
+           aggressive-indent-sit-for-time
+           nil #'aggressive-indent--indent-if-changed (current-buffer)))))
+
+(use-package! logview)
+#+end_src
+** fonts and frame
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Fira Code Retina" :size 18))
+(setq doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
+
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+* Org
+** require and comment
+#+begin_src emacs-lisp
+(require 'doct)
+
+(defmacro comment (&rest _)
+  "Comment out one or more s-expressions."
+  nil)
+
+(use-package! org-rich-yank)
+#+END_SRC
+** Org Settings
+#+begin_src emacs-lisp
+(setq org-archive-location (concat "~/Dropbox/todo/archive/" (format-time-string "%Y-%m") ".org::"))
+
+(setq org-todo-keywords
+      '((sequence
+         "TODO(t)"               ; A task that needs doing & is ready to do
+         "NEXT(n)"
+         "WAIT(w)"               ; Something external is holding up this task
+         "HOLD(h)"               ; This task is paused/on hold because of me
+         "START(s)"               ; A task that is in progress
+         "ACTIVE(a)"
+         "EXTENSION(e)"
+         "|"
+         "DONE(d)"      ; Task successfully completed
+         "SKIP(k)"     ; Skipped a recurring task
+         "KILL(k)"
+         )    ;; Task was cancelled, aborted or is no longer applicable
+        (sequence
+         "[ ](T)"                       ; A task that needs doing
+         "[-](S)"                       ; Task is in progress
+         "[?](W)"                       ; Task is being held up or paused
+         "|"
+         "[X](D)"      ; Task was completed
+         ))
+      org-todo-keyword-faces
+      '(("[-]" . +org-todo-active)
+        ("START" . +org-todo-active)
+        ("NEXT" . +org-todo-active)
+        ("ACTIVE" . +org-todo-active)
+        ("EXTENSION" . +org-todo-active)
+        ("TODO" . +org-todo-active)
+        ("[?]" . +org-todo-onhold)
+        ("WAIT" . +org-todo-onhold)
+        ("HOLD" . +org-todo-onhold))
+        org-ellipsis " ▼ "
+        org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+        org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)))
+
+;; allow refiling into a file without choosing a headline
+(setq org-refile-use-outline-path 'file
+      org-refile-allow-creating-parent-nodes 'confirm
+      org-refile-active-region-within-subtree t
+      org-outline-path-complete-in-steps nil
+
+      ;; startup folded by default (overwritable per file)
+      org-startup-folded t
+
+      ;; org-log-done 'note ;; <-- an interesting option
+      org-log-done 'time
+      org-agenda-log-mode-items '(closed clock state)
+
+      org-agenda-time-grid
+      '((daily today require-timed remove-match)
+        (900 1700)
+        "......"
+        "----------------")
+      org-agenda-show-current-time-in-grid nil
+
+      ;; don't show completed items in the agenda
+      org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-skip-scheduled-if-deadline-is-shown t
+
+
+      org-agenda-files (cl-remove-if
+                        (lambda (s)
+                          (or
+                           (s-contains? "icebox" s)
+                           (s-contains? "goals" s)
+                           (s-contains? "ideas" s)
+                           (s-contains? "urbint" s)
+                           ;; (s-contains? "prompts" s)
+                           (s-contains? "reads" s)
+                           (s-contains? "watches" s)))
+                        (file-expand-wildcards "~/Dropbox/todo/*.org"))
+
+      org-garden-files (append (file-expand-wildcards "~/Dropbox/todo/garden/*.org")
+                               (file-expand-wildcards "~/Dropbox/todo/garden/**/*.org")))
+
+(setq org-roam-file-exclude-regexp
+      ;; this is actually compared to a relative path, despite org-attach-id-dir not being one
+      (list org-attach-id-dir
+            "old/"
+            (file-truename "~/todo/old/")
+            (expand-file-name "~/todo/old/")
+            ))
+
+(defun russ/reset-refile-targets ()
+  (setq
+   org-todo-targets (file-expand-wildcards "~/Dropbox/todo/*.org")
+   org-journal-archive-targets (file-expand-wildcards "~/Dropbox/todo/journal/*.org")
+   org-dailies-targets (file-expand-wildcards "~/Dropbox/todo/daily/*.org")
+
+   org-refile-targets
+   '((org-journal-archive-targets :maxlevel . 1)
+     (nil :maxlevel . 9)
+     (org-todo-targets :maxlevel . 2)
+     (org-dailies-targets :maxlevel . 1))))
+
+(russ/reset-refile-targets)
+
+(comment
+ (append
+  (cl-remove-if
+   (lambda (s)
+     (or
+      (s-contains? "icebox" s)
+      (s-contains? "goals" s)
+      (s-contains? "ideas" s)
+      (s-contains? "prompts" s)
+      (s-contains? "reads" s)
+      (s-contains? "watches" s)))
+   (file-expand-wildcards "~/Dropbox/todo/*.org"))
+  (file-expand-wildcards "~/Dropbox/todo/garden/**/*.org"))
+ )
+
+
+
+(advice-add 'org-archive-subtree
+            :after
+            (lambda (&rest _)
+              (org-save-all-org-buffers)))
+
+(advice-add 'org-refile
+            :after
+            (lambda (&rest _)
+              (org-save-all-org-buffers)))
+
+(advice-add 'org-agenda-redo :after 'org-save-all-org-buffers)
+
+
+(setq org-agenda-custom-commands
+      '(;; TODO note that this misses items scheduled beyond the current agenda
+        ("n" "Agenda and unscheduled TODOs"
+         ((agenda "") (alltodo "" ((org-agenda-todo-ignore-with-date t)))))
+        ("i" "Icebox"
+         ((alltodo "" ((org-agenda-files (file-expand-wildcards "~/todo/icebox.org"))))))
+        ("c" "collage"
+         ((agenda "" ((org-agenda-files (file-expand-wildcards "~/todo/collage.org"))))))
+        ("g" "Garden"
+         ((agenda "" ((org-agenda-files org-garden-files)))
+          (alltodo "" ((org-agenda-files org-garden-files)))))
+        ("d" "Today's items" agenda ""
+         ((org-agenda-span 1)
+          (org-agenda-start-on-weekday nil)
+          (org-agenda-start-day "0d")))
+        ("D" "Today's items (export)" agenda ""
+         ((org-agenda-span 1)
+          (org-agenda-start-on-weekday nil)
+          (org-agenda-start-day "0d"))
+         "~/todo/daily-agenda.html")
+        ("u" "stand [u]p - all tasks yesterday, today, tomorrow" agenda ""
+         ((org-agenda-span 3)
+          (org-agenda-start-day "-1d")
+          (org-agenda-skip-scheduled-if-done nil)
+          (org-agenda-skip-deadline-if-done nil)
+          (org-agenda-skip-scheduled-if-deadline-is-shown nil)
+          (org-agenda-start-with-log-mode '(clock state))
+          (org-agenda-archives-mode t)))))
+
+
+;; https://www.reddit.com/r/orgmode/comments/grgzlb/display_file_path_in_agenda_view/
+
+(defun my-buffer-dir-name ()
+  "Give the directory of (buffer-file-name), and replace the home path by '~'"
+  (interactive)
+  (if (buffer-file-name)
+      (->>
+       (file-name-directory
+        (file-relative-name
+         (buffer-file-name)
+         (expand-file-name "~")))
+       (s-replace "Dropbox/todo/" "")
+       (s-replace "russmatney/" "")
+       (s-replace-regexp "/$" ""))
+    ""))
+
+(setq org-agenda-prefix-format
+      '((agenda  . " %-12(my-buffer-dir-name)%?i%-12:c%?-12t% s")
+        (timeline  . "%?(my-buffer-dir-name)% s")
+        (todo  . " %?-24(my-buffer-dir-name)%?-12:c")
+        (tags  . "%?(my-buffer-dir-name)%i %-12:c")
+        (search . "%?(my-buffer-dir-name)%i %-12:c")))
+
+
+#+END_SRC
+** Org refile helpers
+#+begin_src emacs-lisp
+
+;; from https://emacs.stackexchange.com/questions/8045/org-refile-to-a-known-fixed-location
+(defun russ/refile-to (file headline)
+  "Move current headline to specified location"
+  (let ((pos (save-excursion
+               (find-file file)
+               (org-find-exact-headline-in-buffer headline))))
+    (org-refile nil nil (list headline file nil pos))
+    (switch-to-buffer (current-buffer))))
+
+(defun russ/refile-to-daily (n)
+  ;; TODO this seems to sometimes nest the `daily/` an extra time :/
+  (let ((file-s (format-time-string "~/todo/daily/%Y-%m-%d.org" (time-add (* n 86400) (current-time)))))
+    (save-excursion
+      (org-roam-dailies-capture-tomorrow n t)
+      ;; TODO write the file?
+      )
+    (russ/refile-to file-s "new")))
+
+(comment
+ (format-time-string "%Y-%m-%d.org" (current-time))
+ (format-time-string "%Y-%m-%d.org" (time-add 86400 (current-time)))
+ (format-time-string "%Y-%m-%d.org" (time-add (* (- 1) 86400) (current-time))))
+
+(defhydra hydra-org-refile-daily (:exit t)
+  ;; TODO refile to today's daily note, create if it doesn't exist
+  ("t" (russ/refile-to-daily 0) "Today")
+  ("y" (russ/refile-to-daily -1) "Yesterday")
+  ("T" (russ/refile-to-daily 1) "Tomorrow")
+  ("j" russ/org-refile-to-daily-note "To some daily note" :column "Filter"))
+
+(defhydra hydra-org-refile (:exit t)
+  ("r" org-refile "Org refile" :column "~/todo")
+  ("f" +org/refile-to-file "Refile to File")
+  ("t" (russ/refile-to "~/todo/projects.org" "Todos") "project.org/Todos")
+  ("h" (russ/refile-to "~/todo/projects.org" "Hammock") "project.org/Hammock")
+  ("i" (russ/refile-to "~/todo/icebox.org" "new") "To icebox.org")
+  ("p" (russ/refile-to "~/todo/principles.org" "new") "To principles.org")
+
+  ("g" russ/org-refile-to-existing-note "To existing note" :column "garden")
+  ("c" russ/org-refile-to-new-note "Create new note")
+  ("d" hydra-org-refile-daily/body "To some daily note")
+  ("w" russ/org-refile-to-workspace-note "To some workspace note")
+  ("b" russ/org-refile-to-bucket-note "To a bucket note, i.e. ideas/writing accumulation files"))
+
+#+END_SRC
+** org auto tangle
+#+begin_src emacs-lisp
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
+#+end_src
+
+* dired open
+#+begin_src emacs-lisp
+(use-package! dired-open
+:config
+(setq dired-open-extensions
+    '(("mkv" . "mpv")
+        ("mp4" . "mpv")
+        ("avi" . "mpv")
+        ("mp3" . "mpv")
+        ("png" . "feh")
+        ("jpg" . "feh")
+)))
+#+end_src
+* sql
+** dialects
+#+begin_src emacs-lisp
+ (defun my-possibly-setup-pgdump-outline nil
+   (interactive)
+   (save-excursion
+     (goto-char (point-min))
+     (forward-line 1)
+     (when (looking-at "-- PostgreSQL database dump")
+       (set (make-local-variable 'outline-regexp)
+ 	   "-- \\(Data for \\)?Name:")
+       (set (make-local-variable 'outline-level)
+ 	   (lambda nil 1))
+       (outline-minor-mode 1)
+       (hide-sublevels 1))))
+
+ (add-hook 'sql-mode-hook 'my-possibly-setup-pgdump-outline)
+#+end_src
+
+* Key Bindings
+** bind keys
+#+begin_src emacs-lisp
+(map! :leader
+  (:prefix ("k" . "my keys")
+    :desc "dired open some file" "e" #'dired-open-by-extension
+    :desc "kill buffer"  "k" #'kill-buffer)
+  (:prefix ("t" . "terminals")
+    :desc "open emacs shell" "e" #'eshell
+    :desc "open term"        "t" #'term
+    :desc "open vterm"       "v" #'vterm)
+  (:prefix ("r" . "rustic")
+    :desc "cargo check"      "k" #'rustic-cargo-check
+    :desc "cargo clippy"     "c" #'rustic-cargo-clippy
+    :desc "cargo build"      "b" #'rustic-cargo-build
+    :desc "cargo test"       "t" #'rustic-cargo-test
+    :desc "cargo add"        "a" #'rustic-cargo-add
+    :desc "cargo run"        "r" #'rustic-cargo-run))
+#+end_src
+** unbind keys
+#+begin_src emacs-lisp
+(global-unset-key (kbd "M-x"))
+(global-unset-key (kbd "C-x g"))
+(global-unset-key (kbd "C-x b"))
+(global-unset-key (kbd "C-x C-f"))
+(undefine-key!  'general-override-mode-map "M-x")
+#+end_src

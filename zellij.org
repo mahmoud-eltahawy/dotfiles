@@ -1,0 +1,155 @@
+#+title: Zellij
+#+PROPERTY: header-args:kdl :tangle ~/.config/zellij/config.kdl :mkdirp yes
+#+STARTUP:overview
+#+AUTHOR :Mahmoud ElTahawy
+* config
+#+begin_src kdl
+keybinds clear-defaults=true {
+    shared_except "normal" "locked" {
+        bind "Enter" "Esc" { SwitchToMode "Normal"; }
+    }
+    normal {
+        // uncomment this and adjust key if using copy_on_select=false
+        // bind "Alt c" { Copy; }
+    }
+    shared_except "locked" {
+        // tabs controll
+        bind "Alt n" { NewTab; }
+        bind "Alt h" { GoToPreviousTab; }
+        bind "Alt l" { GoToNextTab; }
+        bind "Alt k" { CloseTab; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+        // panes controll
+        bind "Ctrl n" { NewPane; }
+        bind "Ctrl h" { MoveFocus "Left"; }
+        bind "Ctrl l" { MoveFocus "Right"; }
+        bind "Ctrl k" { CloseFocus; }
+        bind "Ctrl f" { ToggleFocusFullscreen; }
+        bind "Ctrl r" { SwitchToMode "Resize"; }
+        // switch to modes
+        bind "Alt s" { SwitchToMode "Scroll"; }
+        bind "Alt /" { SwitchToMode "EnterSearch"; SearchInput 0; }
+        bind "Alt e" { EditScrollback;}
+        bind "Alt g" { SwitchToMode "Locked"; }
+        bind "Alt q" { Quit; }
+        //font size
+        bind "Ctrl =" { Resize "Increase"; }
+        bind "Ctrl -" { Resize "Decrease"; }
+    }
+    resize {
+        bind "=" { Resize "Increase"; }
+        bind "-" { Resize "Decrease"; }
+    }
+    locked {
+        bind "Alt g" { SwitchToMode "Normal"; }
+    }
+    scroll {
+        bind "Ctrl s" { SwitchToMode "Normal"; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        // uncomment this and adjust key if using copy_on_select=false
+        // bind "Alt c" { Copy; }
+    }
+    search {
+        bind "Ctrl s" { SwitchToMode "Normal"; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+        bind "n" { Search "down"; }
+        bind "p" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+    }
+    entersearch {
+        bind "Enter" { SwitchToMode "Search"; }
+    }
+}
+
+plugins {
+    tab-bar { path "tab-bar"; }
+    status-bar { path "status-bar"; }
+    strider { path "strider"; }
+    compact-bar { path "compact-bar"; }
+}
+
+default_shell "/home/mahmoud/.cargo/bin/nu"
+
+themes {
+    dracula {
+        fg 248 248 242
+        bg 40 42 54
+        red 255 85 85
+        green 80 250 123
+        yellow 241 250 140
+        blue 98 114 164
+        magenta 255 121 198
+        orange 255 184 108
+        cyan 139 233 253
+        black 0 0 0
+        white 255 255 255
+    }
+    nord {
+        fg "#D8DEE9"
+        bg "#2E3440"
+        black "#3B4252"
+        red "#BF616A"
+        green "#A3BE8C"
+        yellow "#EBCB8B"
+        blue "#81A1C1"
+        magenta "#B48EAD"
+        cyan "#88C0D0"
+        white "#E5E9F0"
+        orange "#D08770"
+    }
+    gruvbox-light {
+        fg 60 56 54
+        bg 251 82 75
+        black 40 40 40
+        red 205 75 69
+        green 152 151 26
+        yellow 215 153 33
+        blue 69 133 136
+        magenta 177 98 134
+        cyan 104 157 106
+        white 213 196 161
+        orange 214 93 14
+    }
+    gruvbox-dark {
+        fg "#D5C4A1"
+        bg "#282828"
+        black "#3C3836"
+        red "#CC241D"
+        green "#98971A"
+        yellow "#D79921"
+        blue "#3C8588"
+        magenta "#B16286"
+        cyan "#689D6A"
+        white "#FBF1C7"
+        orange "#D65D0E"
+    }
+}
+
+theme "gruvbox-dark"
+
+default_layout "compact"
+
+scrollback_editor "/usr/bin/emacsclient -nw"
+#+END_SRC

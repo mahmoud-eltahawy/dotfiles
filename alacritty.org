@@ -1,0 +1,154 @@
+#+title: Alacritty
+#+PROPERTY: header-args:yaml :tangle ~/.config/alacritty/alacritty.yml :mkdirp yes
+#+STARTUP:overview
+#+AUTHOR :Mahmoud ElTahawy
+* live config
+#+begin_src yaml
+live_config_reload: false
+#+END_SRC
+* Window
+- opacity = 0.0..1.0  => transparent..opaque
+- startup_mode = Windowed , Maximized or Fullscreen
+- gtk_theme_variant = Dark or Light or none => (default)
+- decorations = none or full
+#+begin_src yaml
+window:
+  decorations: none
+  padding:
+   x: 20
+   y: 20
+  opacity: 0.66
+  startup_mode: Fullscreen
+  decorations_theme_variant: Dark
+#+END_SRC
+* Scrolling
+#+begin_src yaml
+scrolling:
+  history: 50000
+  multiplier: 7
+#+END_SRC
+* Font and size
+#+begin_src yaml
+font:
+  normal:
+    family: firacode
+    style: Regular
+  bold:
+    family: firacode
+    style: Bold
+  italic:
+    family: firacode
+    style: Italic
+  bold_italic:
+    family: firacode
+    style: Bold Italic
+  size: 13.0
+#+END_SRC
+
+* Colors
+** default
+#+begin_src yaml
+colors:
+  primary:
+   background: '#191a2a'
+   foreground: '#4fd6be'
+  transparent_background_colors: true
+#+END_SRC
+** search
+#+begin_src yaml
+  search:
+    matches:
+      foreground: '#191a2a'
+      background: '#4fd6be'
+    focused_match:
+      foreground: '#ffffff'
+      background: '#000000'
+    foot_bar:
+      foreground: '#ffffff'
+      background: '#000000'
+#+END_SRC
+** hints
+#+begin_src yaml
+  hints:
+    start:
+     foreground: '#1d1f21'
+     background: '#e9ff5e'
+    end:
+     foreground: '#e9ff5e'
+     background: '#1d1f21'
+  line_indicator:
+    foreground: '#ffffff'
+    background: '#000000'
+#+END_SRC
+** normal define
+#+begin_src yaml
+  normal:
+    black:   '#3f3f3f'
+    red:     '#ff5370'
+    green:   '#c3e88d'
+    yellow:  '#ffc777'
+    blue:    '#4976eb'
+    magenta: '#c099ff'
+    cyan:    '#86e1fc'
+    white:   '#dcdccc'
+#+END_SRC
+** light define
+#+begin_src yaml
+  bright:
+    black:   '#545454'
+    red:     '#ff757f'
+    green:   '#7af8ca'
+    yellow:  '#ffc777'
+    blue:    '#50c4fa'
+    magenta: '#baacff'
+    cyan:    '#b4f9f8'
+    white:   '#ffffff'
+#+END_SRC
+
+* bell
+- animation = Ease , EaseOut , EaseOutSine , EaseOutQuad , EaseOutCubic , EaseOutQuart, EaseOutQuint , EaseOutExpo , EaseOutCirc or Linear
+  - command example
+  bell:
+    command:
+        program: notify-send
+        args: ["peace"]
+#+begin_src yaml
+bell:
+  animation: EaseOutCubic
+  duration: 400
+  color: '#b4f9f8'
+#+END_SRC
+
+* selection
+#+begin_src yaml
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+#+END_SRC
+* cursor
+- blinking = Never or Off or On or Always
+- shape    = ▇ => Block or _ => Underline or | => Beam
+- thickness= 0.0 => 1.0
+#+begin_src yaml
+cursor:
+  style:
+    shape: Beam
+    blinking: Never
+  vi_mode_style: Block
+  unfocused_hollow: true
+  thickness: 0.0
+#+END_SRC
+* shell
+#+begin_src yaml
+shell:
+ program: /bin/bash
+ args:
+   - --login
+#+END_SRC
+* mouse
+#+begin_src yaml
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+  hide_when_typing: true
+#+END_SRC

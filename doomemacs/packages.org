@@ -1,0 +1,28 @@
+#+title: Packages
+#+PROPERTY: header-args:emacs-lisp
+#+STARTUP:overview
+#+AUTHOR :Mahmoud ElTahawy
+* Org
+#+begin_src emacs-lisp :tangle ~/.config/doom/packages.el
+(package! doct)
+(package! org-auto-tangle)
+(package! org-rich-yank)
+(package! org-projectile)
+(package! org-roam
+  :recipe (:host github :repo "org-roam/org-roam")
+  :pin "e435581215a9eb8e95dde49ce1fb3c25929b80f4")
+#+END_SRC
+* Logs
+#+begin_src emacs-lisp :tangle ~/.config/doom/packages.el
+(package! logview)
+#+END_SRC
+* Dired
+#+begin_src emacs-lisp :tangle ~/.config/doom/packages.el
+(package! dired-open)
+#+END_SRC
+* Shell
+#+begin_src emacs-lisp :tangle ~/.config/doom/packages.el
+(package! company-shell)
+(package! fish-mode)
+(package! powershell)
+#+END_SRC
