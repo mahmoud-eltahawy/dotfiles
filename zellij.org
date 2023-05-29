@@ -14,7 +14,7 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         // tabs controll
-        bind "Alt n" { NewTab; }
+        bind "Alt ;" { NewTab; }
         bind "Alt h" { GoToPreviousTab; }
         bind "Alt l" { GoToNextTab; }
         bind "Alt k" { CloseTab; }
