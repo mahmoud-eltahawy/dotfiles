@@ -4,28 +4,32 @@ import os
 #------------------------------------------------------------------------------------>
 #------------INSTALL FUNCTIONS------------------------------------------------------->
 #------------------------------------------------------------------------------------>
-pacmans = []
-aurs = []
+dnfs = []
 cargos = []
 npms = []
 
-def pacman_install(packages):
-    pacmans.extend(packages)
+def dnfs_install(packages):
+    dnfs.extend(packages)
 
 def npm_install(packages):
     npms.extend(packages)
 
-def paru_install(packages):
-    aurs.extend(packages)
-
 def cargo_install(packages):
     cargos.extend(packages)
 
+def brave_install():
+    os.system("sudo dnf install dnf-plugins-core")
+    os.system("sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo")
+    os.system("sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc")
+    os.system("sudo dnf install brave-browser brave-keyring")
+
 def packages_install():
-    os.system("sudo pacman -S --needed " + " ".join(pacmans))
+    os.system('sudo dnf group install "C Development Tools and Libraries"')
+    os.system("sudo dnf install " + " ".join(dnfs))
+    brave_install()
     os.system("sudo npm install -g " + " ".join(npms))
     os.system("cargo install " + " ".join(cargos))
-    os.system("paru -S " + " ".join(aurs))
+
 
 #------------------------------------------------------------------------------------>
 #------------RUST-------------------------------------------------------------------->
@@ -39,23 +43,39 @@ def rust_install():
         "rust-analyzer",
     ]
     os.system("curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash")
-    os.system("source '$HOME/.cargo/env'")
+    os.system("source $HOME/.cargo/env")
     os.system("rustup target add " + " ".join(targets))
     os.system("rustup component add " + " ".join(components))
+
+#------------------------------------------------------------------------------------>
+#------------Haskell----------------------------------------------------------------->
+#------------------------------------------------------------------------------------>
+
+dnfs_install([
+    "gcc",
+    "gcc-c++",
+    "gmp",
+    "gmp-devel",
+    "make",
+    "ncurses",
+    "ncurses-compat-libs",
+    "xz",
+    "perl",
+])
+
+def haskell_install():
+    os.system("curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | bash")
 
 #------------------------------------------------------------------------------------>
 #------------BASIC PACKAGES---------------------------------------------------------->
 #------------------------------------------------------------------------------------>
 
-pacman_install([
-    "xorg",
+dnfs_install([
     "btop",
     "vifm",
     "mpv",
-    "vlc",
     "nodejs",
     "npm",
-    "unzip",
 ])
 
 cargo_install([
@@ -69,14 +89,6 @@ cargo_install([
     "bacon",
     "wiki-tui",
     "cargo-info",
-    "paru",
-])
-
-paru_install([
-    "ttf-fira-code",
-    "ttf-arabeyes-fonts",
-    "gnome-alsamixer",
-    "brave-bin",
 ])
 
 
@@ -92,27 +104,21 @@ cargo_install([
 ])
 
 # PYTHON DEVELOPMENT
-pacman_install([
-    "python-pipenv",
-    "python-nose",
-    "python-isort",
-])
-paru_install([
-    "python-conda"
+dnfs_install([
+    "pipenv",
+    "python3-nose",
+    "python3-isort",
+    "python3-pytest",
 ])
 
 # TAURI DEVELOPMENT
-pacman_install([
-    "webkit2gtk",
-    "base-devel",
+dnfs_install([
+    "webkit2gtk4.0-devel",
     "curl",
     "wget",
-    "openssl",
-    "appmenu-gtk-module",
-    "gtk3",
+    "openssl-devel",
     "libappindicator-gtk3",
-    "librsvg",
-    "libvips",
+    "librsvg2-devel",
 ])
 cargo_install([
     "create-tauri-app",
@@ -120,9 +126,14 @@ cargo_install([
 ])
 
 # XMONAD
-pacman_install([
+dnfs_install([
+    "libX11-devel",
+    "libXft-devel",
+    "libXinerama-devel",
+    "libXrandr-devel",
+    "libXScrnSaver-devel",
     "xmonad",
-    "xmonad-contrib",
+    "ghc-xmonad-contrib",
     "xmobar",
     "xterm",
     "dmenu",
@@ -135,20 +146,22 @@ pacman_install([
 #------------DOOMEMACS--------------------------------------------------------------->
 #------------------------------------------------------------------------------------>
 
-pacman_install([
-    "emacs-nativecomp",
-    "fd",
-    "shellcheck",
+dnfs_install([
+    "emacs",
+    "fd-find",
+    "ShellCheck",
     "cmake",
     "tidy",
-    "stylelint",
     "jq",
     "xclip",
     "maim",
     "ripgrep",
+    "wl-clipboard",
 ])
 npm_install([
     "js-beautify",
+    "marked",
+    "stylelint",
 ])
 
 def doomemacs_install():
@@ -158,7 +171,7 @@ def doomemacs_install():
 #------------------------------------------------------------------------------------>
 #------------ACTION------------------------------------------------------------------>
 #------------------------------------------------------------------------------------>
-
 rust_install()
 packages_install()
 doomemacs_install()
+haskell_install()
