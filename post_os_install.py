@@ -24,6 +24,7 @@ def cargo_install(packages):
 def packages_install():
     os.system("sudo pacman -S --needed " + " ".join(pacmans))
     os.system("sudo npm install -g " + " ".join(npms))
+    os.system("cargo install sccache")
     os.system("cargo install " + " ".join(cargos))
     os.system("paru -S " + " ".join(aurs))
 
@@ -38,10 +39,11 @@ def rust_install():
     components = [
         "rust-analyzer",
     ]
-    os.system("curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash")
-    os.system("source '$HOME/.cargo/env'")
-    os.system("rustup target add " + " ".join(targets))
-    os.system("rustup component add " + " ".join(components))
+
+    command = "curl https://sh.rustup.rs -sSf | sh -s -- -y  --component {} --target {}"
+    os.system(command.format(" ".join(components)," ".join(targets)))
+    source = 'source "{}/.cargo/env"'
+    os.system(source.format(os.getenv("HOME")))
 
 #------------------------------------------------------------------------------------>
 #------------BASIC PACKAGES---------------------------------------------------------->
@@ -59,7 +61,6 @@ pacman_install([
 ])
 
 cargo_install([
-    "sccache",
     "exa",
     "du-dust",
     "nu",

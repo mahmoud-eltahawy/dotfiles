@@ -77,7 +77,7 @@ myKeys conf@(XConfig {XMonad.modMask = super}) = M.fromList $
 
     -- switch language
     , ((super,               xK_space ), spawn "setxkbmap us")
-    , ((super .|. alt , xK_space ), spawn "setxkbmap ar")
+    , ((super .|. alt , xK_space ), spawn "setxkbmap ara")
 
     ]
     ++
