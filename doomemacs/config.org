@@ -378,6 +378,13 @@
   (setq org-auto-tangle-default t))
 #+end_src
 
+** support RTL languages
+#+begin_src emacs-lisp
+(defun set-bidi-env ()
+  "interactive"
+  (setq bidi-paragraph-direction 'nil))
+(add-hook 'org-mode-hook 'set-bidi-env)
+#+end_src
 * dired open
 #+begin_src emacs-lisp
 (use-package! dired-open

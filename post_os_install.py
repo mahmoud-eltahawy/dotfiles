@@ -9,6 +9,8 @@ aurs = []
 cargos = []
 npms = []
 
+home = os.getenv("HOME")
+
 def pacman_install(packages):
     pacmans.extend(packages)
 
@@ -43,7 +45,7 @@ def rust_install():
     command = "curl https://sh.rustup.rs -sSf | sh -s -- -y  --component {} --target {}"
     os.system(command.format(" ".join(components)," ".join(targets)))
     source = 'source "{}/.cargo/env"'
-    os.system(source.format(os.getenv("HOME")))
+    os.system(source.format(home))
 
 #------------------------------------------------------------------------------------>
 #------------BASIC PACKAGES---------------------------------------------------------->
@@ -98,6 +100,16 @@ pacman_install([
     "python-nose",
     "python-isort",
 ])
+
+def python_install():
+    packages = [
+        "pipe",
+        "pandas",
+        "openpyxl"
+    ]
+    os.system("python -m venv {}/.python".format(home))
+    os.system("{}/.python/bin/pip install ".join(home) + " ".join(packages))
+
 paru_install([
     "python-conda"
 ])
@@ -154,7 +166,7 @@ npm_install([
 
 def doomemacs_install():
     os.system("git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs")
-    os.system("~/.config/emacs/bin/doom install")
+    os.system("{}/.config/emacs/bin/doom install".format(home))
 
 #------------------------------------------------------------------------------------>
 #------------ACTION------------------------------------------------------------------>
