@@ -40,12 +40,14 @@ def rust_install():
     ]
     components = [
         "rust-analyzer",
+        "rust-src",
     ]
 
     command = "curl https://sh.rustup.rs -sSf | sh -s -- -y  --component {} --target {}"
     os.system(command.format(" ".join(components)," ".join(targets)))
-    source = 'source "{}/.cargo/env"'
-    os.system(source.format(home))
+    os.system('source "{}/.cargo/env"'.format(home))
+    os.system("rustup toolchain add nightly")
+    os.system("cargo +nightly install racer")
 
 #------------------------------------------------------------------------------------>
 #------------BASIC PACKAGES---------------------------------------------------------->
@@ -60,6 +62,8 @@ pacman_install([
     "nodejs",
     "npm",
     "unzip",
+    "ttf-nerd-fonts-symbols",
+    "ttf-nerd-fonts-symbols-mono",
 ])
 
 cargo_install([
