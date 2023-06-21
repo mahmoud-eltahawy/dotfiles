@@ -17,8 +17,10 @@
 
 (add-to-list 'default-frame-alist '(font . "Firacode 14"))
 
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
+
 (use-package doom-themes
-  :ensure t
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t
@@ -59,10 +61,6 @@
 
 (global-ligature-mode 't)
 
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode))
-
 (use-package nerd-icons
    :custom
    (nerd-icons-font-family "Symbols Nerd Font Mono"))
@@ -72,7 +70,6 @@
   (dired-mode . nerd-icons-dired-mode))
 
 (use-package nerd-icons-ivy-rich
-  :ensure t
   :init
   (nerd-icons-ivy-rich-mode 1)
   (ivy-rich-mode 1))

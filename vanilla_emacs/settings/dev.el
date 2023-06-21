@@ -1,37 +1,38 @@
 ;;; dev.el --- Description -*- lexical-binding: t; -*-
 
+(electric-pair-mode 1)
+
+(use-package tree-sitter-langs)
 (use-package tree-sitter
   :config
-  (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-(use-package rust-mode
+(use-package flycheck
   :config
-  (setq rust-format-on-save t))
+  (global-flycheck-mode))
 
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (
-         (rust-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
-(add-hook 'rust-mode-hook #'lsp)
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :custom
+    (lsp-ui-peek-always-show t)
+    (lsp-ui-sideline-show-hover t))
 
-(use-package lsp-ui :commands lsp-ui-mode)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
+(use-package ivy
+  :config
+    (ivy-mode 1))
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-;; ivy-rich-display-transformers-list
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package treemacs)
+(use-package lsp-treemacs
+  :after lsp
+  :commands lsp-treemacs-errors-list)
 
+(load (mt-path "dev/auto-complete.el"))
+
+(load (mt-path "dev/rust.el"))
+(load (mt-path "dev/ts.el"))
+(load (mt-path "dev/lsp.el"))
+
+;;; Debug
 (use-package dap-mode)
-
-(use-package which-key
-    :config
-    (which-key-mode))
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-(add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))

@@ -18,14 +18,32 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
-(defun path (name) (concat "/root/.emacs.d/settings/" name))
+(defun mt-path (name) (concat "/home/mahmoud/magit/workflow/vanilla_emacs/settings/" name))
 
 ;;comment this line after successfully installing the packages packages
-(load (path "packages.el"))
+(load (mt-path "packages.el"))
 
 (require 'use-package)
+(setq use-package-always-ensure t)
 
-(load (path "look.el"))
-(load (path "dev.el"))
-(load (path "keys.el"))
-(load (path "org.el"))
+(load (mt-path "look.el"))
+(load (mt-path "dev.el"))
+(load (mt-path "keys.el"))
+(load (mt-path "org.el"))
+
+
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(rustic treemacs-icons-dired use-package tree-sitter-langs rust-mode org-auto-tangle nerd-icons-ivy-rich nerd-icons-dired magit lsp-ui ligature evil-surround doom-themes doom-modeline dap-mode counsel company all-the-icons)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
