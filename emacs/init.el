@@ -18,7 +18,7 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
-(defun mt-path (name) (concat "/home/mahmoud/magit/workflow/vanilla_emacs/settings/" name))
+(defun mt-path (name) (concat "~/magit/workflow/emacs/settings/" name))
 
 ;;comment this line after successfully installing the packages packages
 (load (mt-path "packages.el"))
@@ -40,7 +40,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(rustic treemacs-icons-dired use-package tree-sitter-langs rust-mode org-auto-tangle nerd-icons-ivy-rich nerd-icons-dired magit lsp-ui ligature evil-surround doom-themes doom-modeline dap-mode counsel company all-the-icons)))
+   '(rustic treemacs-icons-dired use-package tree-sitter-langs rust-mode org-auto-tangle nerd-icons-ivy-rich nerd-icons-dired magit lsp-ui ligature evil-surround doom-themes doom-modeline dap-mode counsel company all-the-icons))
+ '(warning-suppress-log-types '((comp) (comp) (comp)))
+ '(warning-suppress-types '((comp) (comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

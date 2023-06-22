@@ -2,22 +2,17 @@
 import os
 
 # ----------------------------------------------------------------------------------->
-# INSTALL FUNCTIONS------------------------------------------------------->
+# INSTALL FUNCTIONS
 # ----------------------------------------------------------------------------------->
 pacmans = []
-aurs = []
 cargos = []
-npms = []
+aurs = []
 
 home = os.getenv("HOME")
 
 
 def pacman_install(packages):
     pacmans.extend(packages)
-
-
-def npm_install(packages):
-    npms.extend(packages)
 
 
 def paru_install(packages):
@@ -30,7 +25,6 @@ def cargo_install(packages):
 
 def packages_install():
     os.system("sudo pacman -S --needed " + " ".join(pacmans))
-    os.system("sudo npm install -g " + " ".join(npms))
     os.system("cargo install sccache")
     os.system("cargo install " + " ".join(cargos))
     os.system("paru -S " + " ".join(aurs))
@@ -51,7 +45,7 @@ def rust_install():
 
     command = "curl https://sh.rustup.rs -sSf | sh -s -- -y  --component {} --target {}"
     os.system(command.format(" ".join(components), " ".join(targets)))
-    os.system('source "{}/.cargo/env"'.format(home))
+    os.system(f'source "{home}/.cargo/env"')
     os.system("rustup toolchain add nightly")
     os.system("cargo +nightly install racer")
 
@@ -61,14 +55,16 @@ def rust_install():
 
 
 pacman_install([
+    "emacs-nativecomp",
+    "fd",
+    "cmake",
     "xorg",
     "btop",
     "vifm",
     "mpv",
     "vlc",
-    "nodejs",
-    "npm",
     "unzip",
+    "deno",
     "ttf-nerd-fonts-symbols",
     "ttf-nerd-fonts-symbols-mono",
 ])
@@ -84,6 +80,7 @@ cargo_install([
     "wiki-tui",
     "cargo-info",
     "paru",
+    "ripgrep",
 ])
 
 paru_install([
@@ -108,6 +105,7 @@ cargo_install([
 # PYTHON DEVELOPMENT
 pacman_install([
     "python-pipenv",
+    "python-pylint",
     "python-nose",
     "python-isort",
 ])
@@ -119,9 +117,9 @@ def python_install():
         "pandas",
         "openpyxl"
     ]
-    os.system("python -m venv {}/.python".format(home))
+    os.system(f"python -m venv {home}/.python")
     os.system("pip install python-lsp-server[all]")
-    os.system("{}/.python/bin/pip install ".join(home) + " ".join(packages))
+    os.system(f"{home}/.python/bin/pip install " + " ".join(packages))
 
 
 paru_install([
@@ -158,37 +156,6 @@ pacman_install([
     "nitrogen",
 ])
 
-# ----------------------------------------------------------------------------------->
-# DOOMEMACS
-# ----------------------------------------------------------------------------------->
-
-pacman_install([
-    "emacs-nativecomp",
-    "fd",
-    "shellcheck",
-    "cmake",
-    "tidy",
-    "stylelint",
-    "jq",
-    "xclip",
-    "maim",
-    "ripgrep",
-])
-npm_install([
-    "js-beautify",
-])
-
-
-def doomemacs_install():
-    os.system("git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs")
-    os.system("{}/.config/emacs/bin/doom install".format(home))
-
-# ----------------------------------------------------------------------------------->
-# ACTION
-# ----------------------------------------------------------------------------------->
-
 
 rust_install()
 packages_install()
-doomemacs_install()
-
