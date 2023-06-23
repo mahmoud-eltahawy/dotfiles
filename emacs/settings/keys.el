@@ -1,5 +1,11 @@
 ;;; keys.el --- Description -*- lexical-binding: t; -*-
 
+(defun sudo-find-file (file-name)
+  "Like find file, but opens the file as root."
+  (interactive "FSudo Find File: ")
+  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
+    (find-file tramp-file-name)))
+
 (use-package evil
   :config
   (evil-mode 1))
@@ -24,6 +30,7 @@
 (mt/keys
   ";"  'counsel-M-x
   "."  'dired
+  "b"  'ivy-switch-buffer
 
   "t"  '(:ignore t :which-key "toggles")
   "tt" '(counsel-load-theme :which-key "choose theme")
@@ -35,4 +42,5 @@
   "gg" '(magit-status :which-key "magit status")
 
   "f"  '(:ignore f :which-key "files")
-  "ff"  '(find-file :which-key "find file"))
+  "ff" '(find-file :which-key "find file")
+  "fu" '(sudo-find-file :which-key "sudo find file"))
