@@ -9,7 +9,9 @@
 (package-refresh-contents)
 
 (defconst mt/packages
-  '(which-key
+  '(haskell-mode
+    nix-mode
+    which-key
     general
     python-mode
     pyenv-mode

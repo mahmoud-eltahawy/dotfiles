@@ -90,7 +90,7 @@ plugins {
     compact-bar { path "compact-bar"; }
 }
 
-default_shell "/home/mahmoud/.cargo/bin/nu"
+default_shell "/run/current-system/sw/bin/nu"
 
 themes {
     dracula {

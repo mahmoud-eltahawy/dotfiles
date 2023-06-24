@@ -1,11 +1,8 @@
-#+title: Xmonad
-#+PROPERTY: header-args:hs :tangle ~/.config/xmonad/xmonad.hs :mkdirp yes
-#+STARTUP:overview
-#+AUTHOR :Mahmoud ElTahawy
-* Imports
-#+begin_src hs
 import XMonad
 import Data.Monoid
+
+import XMonad.Actions.Volume
+import XMonad.Util.Dzen
 
 import System.Exit
 import XMonad.Util.SpawnOnce
@@ -15,17 +12,15 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 import XMonad.Layout.Gaps
-#+END_SRC
-* Key binds
-- M (Alt) is mapped to s (super)
-- xK_semicolon => ;
-- xK_comma     => ,
-- xK_period    => .
-#+begin_src hs
+
+alert = dzenConfig return . show
+
 myKeys conf@(XConfig {XMonad.modMask = super}) = M.fromList $
     [
+      ((0,                   xK_F6    ), lowerVolume 4 >>= alert)
+    , ((0,                   xK_F7    ), raiseVolume 4 >>= alert)
     -- launch a terminal
-      ((super,               xK_Return), spawn $ XMonad.terminal conf)
+    , ((super,               xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
     , ((super,               xK_p     ), spawn "dmenu_run")
@@ -93,9 +88,6 @@ myKeys conf@(XConfig {XMonad.modMask = super}) = M.fromList $
      alt = mod1Mask
      shift = shiftMask
 
-#+END_SRC
-* Mouse binds
-#+begin_src hs
 myMouseBindings (XConfig {XMonad.modMask = super}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -110,9 +102,7 @@ myMouseBindings (XConfig {XMonad.modMask = super}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
-#+END_SRC
-* Layouts
-#+begin_src hs
+
 myLayout = tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
@@ -127,44 +117,27 @@ myLayout = tiled ||| Full
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
-#+END_SRC
-* Window rules
-#+begin_src hs
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
-#+END_SRC
-* Event handling
-#+begin_src hs
+
 myEventHook = mempty
-#+END_SRC
 
-* Status bars and logging
-- See the 'XMonad.Hooks.DynamicLog' extension for examples.
-#+begin_src hs
 myLogHook = return ()
-#+END_SRC
 
-* Startup hook
-#+begin_src hs
 myStartupHook = do
      spawnOnce "emacs --bg-daemon &"
      spawnOnce "nitrogen --restore &"
      spawnOnce "picom &"
-#+END_SRC
 
-* Main
-#+begin_src hs
 main = do
     xmproc <- spawnPipe "xmobar ~/magit/workflow/xmobarrc"
     xmonad defaults
-#+END_SRC
 
-* Basic structure
-#+begin_src hs
+
 defaults = def {
         terminal           = "alacritty",
         focusFollowsMouse  = True,
@@ -184,4 +157,3 @@ defaults = def {
         logHook            = myLogHook,
         startupHook        = myStartupHook
     }
-#+END_SRC

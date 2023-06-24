@@ -141,7 +141,7 @@ cursor:
 * shell
 #+begin_src yaml
 shell:
- program: /bin/bash
+ program: /run/current-system/sw/bin/bash
  args:
    - --login
 #+END_SRC

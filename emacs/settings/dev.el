@@ -34,5 +34,11 @@
 (load (mt-path "dev/ts.el"))
 (load (mt-path "dev/lsp.el"))
 
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+(use-package haskell-mode)
+
 ;;; Debug
 (use-package dap-mode)

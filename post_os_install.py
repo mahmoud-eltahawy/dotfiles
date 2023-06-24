@@ -1,37 +1,24 @@
 #!/usr/bin/env python3
 import os
 
-# ----------------------------------------------------------------------------------->
-# INSTALL FUNCTIONS
-# ----------------------------------------------------------------------------------->
-pacmans = []
-cargos = []
-aurs = []
-
 home = os.getenv("HOME")
 
+cargos = [
+    "irust",
+    "bacon",
+    "cargo-info",
+    "cargo-leptos",
+    "leptosfmt",
+    "trunk",
+    "create-tauri-app",
+    "tauri-cli",
+]
 
-def pacman_install(packages):
-    pacmans.extend(packages)
-
-
-def paru_install(packages):
-    aurs.extend(packages)
-
-
-def cargo_install(packages):
-    cargos.extend(packages)
-
-
-def packages_install():
-    os.system("sudo pacman -S --needed " + " ".join(pacmans))
-    os.system("cargo install sccache")
-    os.system("cargo install " + " ".join(cargos))
-    os.system("paru -S " + " ".join(aurs))
-
-# ----------------------------------------------------------------------------------->
-# RUST
-# ----------------------------------------------------------------------------------->
+pips = [
+    "pipe",
+    "pandas",
+    "openpyxl"
+]
 
 
 def rust_install():
@@ -43,119 +30,16 @@ def rust_install():
         "rust-src",
     ]
 
-    command = "curl https://sh.rustup.rs -sSf | sh -s -- -y  --component {} --target {}"
-    os.system(command.format(" ".join(components), " ".join(targets)))
-    os.system(f'source "{home}/.cargo/env"')
+    os.system("rustup default stable")
     os.system("rustup toolchain add nightly")
-    os.system("cargo +nightly install racer")
-
-# ----------------------------------------------------------------------------------->
-# BASIC PACKAGES---------------------------------------------------------->
-# ----------------------------------------------------------------------------------->
-
-
-pacman_install([
-    "emacs-nativecomp",
-    "fd",
-    "cmake",
-    "xorg",
-    "btop",
-    "vifm",
-    "mpv",
-    "vlc",
-    "unzip",
-    "deno",
-    "ttf-nerd-fonts-symbols",
-    "ttf-nerd-fonts-symbols-mono",
-])
-
-cargo_install([
-    "exa",
-    "du-dust",
-    "nu",
-    "bat",
-    "zellij",
-    "irust",
-    "bacon",
-    "wiki-tui",
-    "cargo-info",
-    "paru",
-    "ripgrep",
-])
-
-paru_install([
-    "ttf-fira-code",
-    "ttf-arabeyes-fonts",
-    "gnome-alsamixer",
-    "brave-bin",
-])
-
-
-# ----------------------------------------------------------------------------------->
-# WINDOW MANGER AND DEVELOPMENT DEPENDENCIES
-# ----------------------------------------------------------------------------------->
-
-# LEPTOS DEVELOPMENT
-cargo_install([
-    "cargo-leptos",
-    "leptosfmt",
-    "trunk",
-])
-
-# PYTHON DEVELOPMENT
-pacman_install([
-    "python-pipenv",
-    "python-pylint",
-    "python-nose",
-    "python-isort",
-])
+    os.system("cargo install " + " ".join(cargos))
+    os.system("rustup target add " + " ".join(targets))
+    os.system("rustup component add " + " ".join(components))
 
 
 def python_install():
-    packages = [
-        "pipe",
-        "pandas",
-        "openpyxl"
-    ]
     os.system(f"python -m venv {home}/.python")
-    os.system("pip install python-lsp-server[all]")
-    os.system(f"{home}/.python/bin/pip install " + " ".join(packages))
-
-
-paru_install([
-    "python-conda"
-])
-
-# TAURI DEVELOPMENT
-pacman_install([
-    "webkit2gtk",
-    "base-devel",
-    "curl",
-    "wget",
-    "openssl",
-    "appmenu-gtk-module",
-    "gtk3",
-    "libappindicator-gtk3",
-    "librsvg",
-    "libvips",
-])
-cargo_install([
-    "create-tauri-app",
-    "tauri-cli",
-])
-
-# XMONAD
-pacman_install([
-    "xmonad",
-    "xmonad-contrib",
-    "xmobar",
-    "xterm",
-    "dmenu",
-    "alacritty",
-    "picom",
-    "nitrogen",
-])
-
+    os.system(f"{home}/.python/bin/pip install " + " ".join(pips))
 
 rust_install()
-packages_install()
+python_install()

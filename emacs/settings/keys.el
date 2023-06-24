@@ -44,3 +44,6 @@
   "f"  '(:ignore f :which-key "files")
   "ff" '(find-file :which-key "find file")
   "fu" '(sudo-find-file :which-key "sudo find file"))
+
+(define-key evil-visual-state-map (kbd "g c") 'comment-dwim)
+(define-key evil-normal-state-map (kbd "g c") 'comment-line)
