@@ -30,7 +30,7 @@
 (mt/keys
   ";"  'counsel-M-x
   "."  'dired
-  "b"  'ivy-switch-buffer
+  "b"  'switch-to-buffer
 
   "t"  '(:ignore t :which-key "toggles")
   "tt" '(counsel-load-theme :which-key "choose theme")

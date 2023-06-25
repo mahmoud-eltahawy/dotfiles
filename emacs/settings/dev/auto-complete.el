@@ -34,7 +34,6 @@
           (indent-for-tab-command)))))
 
 (use-package company
-  :after lsp-mode
   :hook (prog-mode . company-mode)
   :config
     (add-hook 'after-init-hook 'global-company-mode)
@@ -50,9 +49,7 @@
 	("M->". company-select-last))
     (:map company-mode-map
         ("<tab>". tab-indent-or-complete)
-        ("TAB". tab-indent-or-complete))
-    (:map lsp-mode-map
-        ("<tab>" . company-indent-or-complete-common)))
+        ("TAB". tab-indent-or-complete)))
 
 (use-package company-box
   :hook (company-mode . company-box-mode))

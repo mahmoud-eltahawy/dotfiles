@@ -41,6 +41,8 @@
     LC_TIME = "ar_EG.UTF-8";
   };
 
+  virtualisation.docker.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     enable = true;
@@ -74,7 +76,7 @@
   # Enable automatic login for the user.
   services.getty.autologinUser = "mahmoude";
 
-  nix.settings.trusted-users = ["root" "mahmoud"];
+  nix.settings.trusted-users = ["root" "mahmoude"];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow unfree packages
@@ -92,7 +94,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    emacs
+    emacs29
+    xclip
+    xdotool
+    xorg.xprop
+    xorg.xwininfo
+
+    discord
     vim
     vifm-full
     btop
@@ -100,8 +108,11 @@
     vlc
     unzip
     feh
+    sqlx-cli
 
     brave
+    dbeaver
+    libreoffice-still
 
     xfce.thunar
     dmenu-rs
@@ -109,12 +120,12 @@
     alacritty
     xterm
 
+    curl
     wget
     git
 
     gcc
     cmake
-    deno
 
     rustup
     bat
@@ -126,21 +137,7 @@
     wiki-tui
     sccache
 
-    python3Full
-    pipenv
-    pylint
-    conda
-    python311Packages.isort
-    python311Packages.python-lsp-server
-
     ghc
-    ghcid
-    stack
-    cabal-install
-    stylish-haskell
-    haskell-language-server
-    haskellPackages.hoogle
-    haskellPackages.ghcide
     haskellPackages.gtk2hs-buildtools
 
     haskellPackages.xmobar

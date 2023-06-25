@@ -9,37 +9,35 @@
 (package-refresh-contents)
 
 (defconst mt/packages
-  '(haskell-mode
+  '(emacs-everywhere
+    org-superstar
+    beacon
+    marginalia
+    envrc
+    haskell-mode
+    vertico
+    yaml-mode
     nix-mode
     which-key
     general
-    python-mode
-    pyenv-mode
     typescript-mode
     company-box
-    use-package
     evil
     magit
     dap-mode
-    lsp-mode
     rust-mode
-    flycheck
     company
     yasnippet
     org-auto-tangle
-    tree-sitter
     doom-modeline
-    ivy
-    ivy-rich
     counsel
-    tree-sitter-langs
-    lsp-ui
     all-the-icons
     nerd-icons-dired
-    nerd-icons-ivy-rich
-    doom-themes ligature
+    doom-themes
+    ligature
     evil-surround))
 
 (dolist (x mt/packages)
   (unless (package-installed-p x)
     (package-install x)))
+

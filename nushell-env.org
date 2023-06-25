@@ -18,6 +18,11 @@ def wifi_connect_hidden [ssid?,password?] {
     }
 }
 
+def update_sys [] {
+    sudo nix-channel --update;
+    sudo nixos-rebuild switch;
+}
+
 def wifi_connect [ssid?,password?] {
     if $ssid == null and $password == null {
         nmcli device;
@@ -109,7 +114,6 @@ let-env NU_LIB_DIRS = [
 let-env NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins')
 ]
-let-env PATH = ($env.PATH | split row (char esep) | prepend '/home/mahmoud/.python/bin/')
-# To add entries to PATH (on Windows you might use Path), you can use the following pattern:
-# let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
+
+let-env PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
 #+END_SRC

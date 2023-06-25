@@ -1,10 +1,14 @@
 ;;; look.el --- Description -*- lexical-binding: t; -*-
 
+(setq split-width-threshold 0)
+(setq split-window-default 'vertical)
+
 (setq whitespace-style '(trailing lines space-before-tab
                                   indentation space-after-tab)
-      whitespace-line-column 80)
+      whitespace-line-column 77)
 
 (global-display-line-numbers-mode 1)
+(beacon-mode 1)
 (setq display-line-numbers-type 'relative)
 
 (menu-bar-mode -1)
@@ -25,15 +29,10 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
+  (load-theme 'doom-moonlight t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -44,22 +43,24 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 
-;; Enable the www ligature in every possible major mode
-(ligature-set-ligatures 't '("www"))
+(use-package ligature
+  :config
+    ;; Enable the www ligature in every possible major mode
+    (ligature-set-ligatures 't '("www"))
 
-;; Enable ligatures in programming modes
-(ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
-                                     ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
-                                     "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
-                                     "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
-                                     "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
-                                     "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
-                                     "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
-                                     "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
-                                     "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
-                                     "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+    ;; Enable ligatures in programming modes
+    (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+					":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+					"-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+					"#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+					"/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+					"++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+					"=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+					"<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+					"<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+					"<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
 
-(global-ligature-mode 't)
+    (global-ligature-mode 't))
 
 (use-package nerd-icons
    :custom
@@ -69,19 +70,27 @@
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
-(use-package nerd-icons-ivy-rich
+(use-package vertico
+  :bind (:map vertico-map
+         ("C-j" . vertico-next)
+         ("C-k" . vertico-previous)
+         ("C-f" . vertico-exit)
+         :map minibuffer-local-map
+         ("M-h" . backward-kill-word))
+  :custom
+  (vertico-cycle t)
   :init
-  (nerd-icons-ivy-rich-mode 1)
-  (ivy-rich-mode 1))
-;; Whether display the icons
-(setq nerd-icons-ivy-rich-icon t)
+  (vertico-mode))
 
-(setq nerd-icons-ivy-rich-color-icon t)
+(use-package savehist
+  :init
+  (savehist-mode))
 
-(setq nerd-icons-ivy-rich-icon-size 1.0)
+(use-package marginalia
+  :after vertico
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
 
-(setq nerd-icons-ivy-rich-project t)
-
-(setq nerd-icons-ivy-rich-field-width 80)
-
-(setq inhibit-compacting-font-caches t)
+(use-package emacs-everywhere)
