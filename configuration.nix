@@ -99,6 +99,7 @@
     xdotool
     xorg.xprop
     xorg.xwininfo
+    dunst
 
     discord
     vim
