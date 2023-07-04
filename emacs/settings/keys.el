@@ -45,5 +45,6 @@
   "ff" '(find-file :which-key "find file")
   "fu" '(sudo-find-file :which-key "sudo find file"))
 
+(evil-define-key 'normal 'evil-org-mode-map "<tab>" #'org-force-cycle-archived)
 (define-key evil-visual-state-map (kbd "g c") 'comment-dwim)
 (define-key evil-normal-state-map (kbd "g c") 'comment-line)

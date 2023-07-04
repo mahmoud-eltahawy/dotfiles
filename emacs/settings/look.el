@@ -21,20 +21,25 @@
 
 (add-to-list 'default-frame-alist '(font . "Firacode 14"))
 
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode))
+(setq
+ modus-themes-mode-line '(accented borderless padded)
+ modus-themes-region '(bg-only no-extend)
+ modus-themes-bold-constructs t
+ modus-themes-italic-constructs t
+ modus-themes-fringes 'subtle
+ modus-themes-prompts '(bold intense)
+ modus-themes-tabs-accented t
+ modus-themes-scale-headings t
+ modus-themes-paren-match '(bold intense)
+ modus-themes-syntax '(alt-syntax green-strings yellow-comments)
+ modus-themes-org-blocks 'tinted-background
+ modus-themes-headings
+      '((1 . (rainbow overline background 1.6))
+        (2 . (rainbow background 1.4))
+        (3 . (rainbow bold 1.2))
+        (t . (semilight 1.0))))
 
-(use-package doom-themes
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-moonlight t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+(load-theme 'modus-vivendi t)
 
 ;; fullscreen an opacity
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))

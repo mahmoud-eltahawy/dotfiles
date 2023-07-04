@@ -29,11 +29,9 @@
     company
     yasnippet
     org-auto-tangle
-    doom-modeline
     counsel
     all-the-icons
     nerd-icons-dired
-    doom-themes
     ligature
     evil-surround))
 
