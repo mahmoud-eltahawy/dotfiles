@@ -1,4 +1,4 @@
-;;; rust.el --- Description -*- lexical-binding: t; -*-
+;;; rust.el --- description -*- lexical-binding: t; -*-
 
 (use-package rust-mode)
 
@@ -6,3 +6,4 @@
   :after rust-mode-hook)
 
 (setq lsp-rust-analyzer-cargo-watch-command "clippy")
+

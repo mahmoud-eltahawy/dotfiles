@@ -19,3 +19,8 @@ rustup component add \
 
 rustup target add         \
     wasm32-unknown-unknown ;
+
+cp ~/magit/dotfiles/emacs/init.el ~/.emacs.d/;
+ln ~/magit/dotfiles/xmonad/xmonad.hs ~/.config/xmonad/xmonad.hs;
+ln ~/magit/dotfiles/bash_profile ~/.bash_profile
+sudo ln ~/magit/dotfiles/configuration.nix /etc/nixos/configuration.nix;

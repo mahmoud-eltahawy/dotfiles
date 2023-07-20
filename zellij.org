@@ -28,7 +28,7 @@ keybinds clear-defaults=true {
         bind "Alt 8" { GoToTab 8; }
         bind "Alt 9" { GoToTab 9; }
         // panes controll
-        bind "Ctrl n" { NewPane; }
+        bind "Ctrl ;" { NewPane; }
         bind "Ctrl h" { MoveFocus "Left"; }
         bind "Ctrl l" { MoveFocus "Right"; }
         bind "Ctrl k" { CloseFocus; }
