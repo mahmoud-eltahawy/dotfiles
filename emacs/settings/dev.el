@@ -1,18 +1,19 @@
 ;;; dev.el --- Description -*- lexical-binding: t; -*-
 
+(use-package dap-mode) ;; -> comes from this package
+
 (electric-pair-mode 1)
 (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1)
 
-(load (mt-path "dev/auto-complete.el"))
+(-> "dev/auto-complete.el" mt-path load)
 
-(load (mt-path "dev/rust.el"))
-(load (mt-path "dev/haskell.el"))
-(load (mt-path "dev/sql.el"))
-
+(-> "dev/rust.el" mt-path load)
+(-> "dev/haskell.el" mt-path load)
+(-> "dev/sql.el" mt-path load)
+(-> "dev/eglot.el" mt-path load)
 
 (use-package nix-mode
   :mode "\\.nix\\'")
 (use-package yaml-mode)
 
-;;; Debug
-(use-package dap-mode)
+

@@ -21,11 +21,11 @@
 (defun mt-path (name) (concat "~/magit/dotfiles/emacs/settings/" name))
 
 ;;comment this line after successfully installing the packages packages
-;;(load (mt-path "packages.el"))
+;; (load (mt-path "packages.el"))
 
 (setq use-package-always-ensure t)
 
-(load (mt-path "look.el"))
 (load (mt-path "dev.el"))
-(load (mt-path "keys.el"))
-(load (mt-path "org.el"))
+(-> "keys.el" mt-path load)
+(-> "org.el" mt-path load)
+(-> "look.el" mt-path load)
