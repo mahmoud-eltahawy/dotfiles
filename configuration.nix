@@ -50,15 +50,9 @@
     autorun = true;
     layout = "us";
     xkbVariant = "";
-    windowManager = {
-      xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-      };
-    };
     windowManager.leftwm.enable = true;
     displayManager = {
-      defaultSession = "none+xmonad";
+      defaultSession = "none+leftwm";
       lightdm = {
           greeters.enso = {
           enable = true;
@@ -140,14 +134,9 @@
     wiki-tui
     sccache
 
-    ghc
-    haskellPackages.gtk2hs-buildtools
-    haskellPackages.xmobar
-
     nodePackages.vscode-langservers-extracted
     nodePackages.yaml-language-server
     nodePackages.bash-language-server
-    haskellPackages.haskell-language-server
     marksman
 
     nitrogen
