@@ -5,7 +5,7 @@
 
 (setq whitespace-style '(trailing lines space-before-tab
                                   indentation space-after-tab)
-      whitespace-line-column 77)
+      whitespace-line-column 80)
 
 (global-display-line-numbers-mode 1)
 (beacon-mode 1)

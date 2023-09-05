@@ -1,7 +1,6 @@
 #!/run/current-system/sw/bin/bash
 
 rustup default stable;
-rustup toolchain add nightly;
 
 cargo install \
     irust      \
