@@ -92,28 +92,23 @@
     jack.enable = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     emacs29
-    xclip
-    xdotool
-    xorg.xprop
-    xorg.xwininfo
     dunst
     cloc
     simplescreenrecorder
     shotgun
     pavucontrol
 
+    alacritty
     gitui
     lldb
     jq
     helix
+    xclip
     vifm-full
     btop
     mpv
-    vlc
     unzip
     feh
     sqlx-cli
@@ -125,8 +120,6 @@
     xfce.thunar
     dmenu-rs
 
-    alacritty
-    xterm
 
     curl
     wget
