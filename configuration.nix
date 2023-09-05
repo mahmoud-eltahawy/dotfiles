@@ -56,6 +56,7 @@
         enableContribAndExtras = true;
       };
     };
+    windowManager.leftwm.enable = true;
     displayManager = {
       defaultSession = "none+xmonad";
       lightdm = {
@@ -99,6 +100,7 @@
     shotgun
     pavucontrol
 
+    polybar
     alacritty
     gitui
     lldb
