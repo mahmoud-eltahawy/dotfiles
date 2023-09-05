@@ -141,11 +141,13 @@
 
     ghc
     haskellPackages.gtk2hs-buildtools
-    haskellPackages.haskell-language-server
     haskellPackages.xmobar
 
     nodePackages.vscode-langservers-extracted
     nodePackages.yaml-language-server
+    nodePackages.bash-language-server
+    haskellPackages.haskell-language-server
+    marksman
 
     nitrogen
     picom
