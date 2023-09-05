@@ -93,7 +93,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    emacs29
     dunst
     cloc
     simplescreenrecorder
