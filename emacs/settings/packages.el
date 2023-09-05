@@ -9,23 +9,19 @@
 (package-refresh-contents)
 
 (defconst mt/packages
-  '(emacs-everywhere
-    org-superstar
+  '(org-superstar
     beacon
     marginalia
     envrc
-    haskell-mode
     vertico
     yaml-mode
     nix-mode
     which-key
     general
-    typescript-mode
     company-box
     evil
     magit
     dap-mode
-    rust-mode
     company
     yasnippet
     org-auto-tangle

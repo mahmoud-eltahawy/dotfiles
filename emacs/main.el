@@ -15,6 +15,8 @@
 ;;; Code:
 ;;;
 
+(use-package dap-mode) ;; -> comes from this package
+
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
@@ -25,7 +27,6 @@
 
 (setq use-package-always-ensure t)
 
-(load (mt-path "dev.el"))
 (-> "keys.el" mt-path load)
 (-> "org.el" mt-path load)
 (-> "look.el" mt-path load)

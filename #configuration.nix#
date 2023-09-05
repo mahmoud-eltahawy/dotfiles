@@ -106,9 +106,6 @@
     shotgun
     pavucontrol
 
-    gitui
-    lldb
-    jq
     helix
     vifm-full
     btop
@@ -136,7 +133,6 @@
     cmake
 
     rustup
-    taplo
     bat
     nushell
     zellij
@@ -148,12 +144,8 @@
 
     ghc
     haskellPackages.gtk2hs-buildtools
-    haskellPackages.haskell-language-server
+
     haskellPackages.xmobar
-
-    nodePackages.vscode-langservers-extracted
-    nodePackages.yaml-language-server
-
     nitrogen
     picom
   ];

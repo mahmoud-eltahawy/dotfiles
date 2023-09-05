@@ -1,9 +1,3 @@
-#+title: Zellij
-#+PROPERTY: header-args:kdl :tangle ~/.config/zellij/config.kdl :mkdirp yes
-#+STARTUP:overview
-#+AUTHOR :Mahmoud ElTahawy
-* config
-#+begin_src kdl
 keybinds clear-defaults=true {
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
@@ -14,7 +8,7 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         // tabs controll
-        bind "Alt ;" { NewTab; }
+        bind "Alt p" { NewTab; }
         bind "Alt h" { GoToPreviousTab; }
         bind "Alt l" { GoToNextTab; }
         bind "Alt k" { CloseTab; }
@@ -28,14 +22,14 @@ keybinds clear-defaults=true {
         bind "Alt 8" { GoToTab 8; }
         bind "Alt 9" { GoToTab 9; }
         // panes controll
-        bind "Ctrl ;" { NewPane; }
+        bind "Ctrl t" { NewPane; }
         bind "Ctrl h" { MoveFocus "Left"; }
         bind "Ctrl l" { MoveFocus "Right"; }
         bind "Ctrl k" { CloseFocus; }
         bind "Ctrl f" { ToggleFocusFullscreen; }
         bind "Ctrl r" { SwitchToMode "Resize"; }
         // switch to modes
-        bind "Alt s" { SwitchToMode "Scroll"; }
+        bind "Alt *" { SwitchToMode "Scroll"; }
         bind "Alt /" { SwitchToMode "EnterSearch"; SearchInput 0; }
         bind "Alt e" { EditScrollback;}
         bind "Alt g" { SwitchToMode "Locked"; }
@@ -151,5 +145,4 @@ theme "gruvbox-dark"
 
 default_layout "compact"
 
-scrollback_editor "/usr/bin/emacsclient -nw"
-#+END_SRC
+scrollback_editor "hx"

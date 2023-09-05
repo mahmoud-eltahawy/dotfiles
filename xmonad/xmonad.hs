@@ -27,11 +27,8 @@ myKeys conf@(XConfig {XMonad.modMask = super}) = M.fromList $
     -- launch dmenu
     , ((super,               xK_p     ), spawn "dmenu_run")
 
-    -- launch emacs client
-    , ((super,               xK_semicolon     ), spawn "emacsclient -c")
-    
-    -- launch emacs everywhere window
-    , ((super .|. shift,     xK_semicolon     ), spawn "emacsclient --eval \"(emacs-everywhere)\"")
+    -- launch helix in new window
+    , ((super,               xK_semicolon     ), spawn "alacritty -e hx")
 
     -- close focused window
     , ((super,               xK_k     ), kill)
@@ -132,7 +129,6 @@ myEventHook = mempty
 myLogHook = return ()
 
 myStartupHook = do
-     spawnOnce "emacs --bg-daemon &"
      spawnOnce "nitrogen --restore &"
      spawnOnce "picom &"
 
