@@ -1,17 +1,3 @@
-#+title: Nushell
-#+PROPERTY: header-args:nu :tangle ~/.config/nushell/config.nu :mkdirp yes
-#+STARTUP:overview
-#+AUTHOR :Mahmoud ElTahawy
-* Config
-# Nushell Config File
-#
-# version = 0.80.0
-
-# For more information on defining custom themes, see
-# https://www.nushell.sh/book/coloring_and_theming.html
-# And here is the theme collection
-# https://github.com/nushell/nu_scripts/tree/main/themes
-#+begin_src nu
 let dark_theme = {
     # color for nushell primitives
     separator: white
@@ -462,4 +448,3 @@ let-env config = {
     }
   ]
 }
-#+END_SRC

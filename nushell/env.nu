@@ -1,14 +1,3 @@
-#+title: Nushell Env
-#+PROPERTY: header-args:nu :tangle ~/.config/nushell/env.nu :mkdirp yes
-#+STARTUP:overview
-#+AUTHOR :Mahmoud ElTahawy
-
-# Nushell Environment Config File
-#
-# version = 0.80.0
-
-* config
-#+begin_src nu
 def wifi_connect_hidden [ssid?,password?] {
     if $ssid == null or $password == null {
         nmcli device;
@@ -116,4 +105,3 @@ let-env NU_PLUGIN_DIRS = [
 ]
 
 let-env PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
-#+END_SRC

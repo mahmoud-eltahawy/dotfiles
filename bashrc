@@ -1,8 +1,5 @@
 #!/run/current-system/sw/bin/bash
 
-#put this line in ~/.bash_profile
-#[[ -f ~/magit/dotfiles/bashrc ]] && source ~/magit/dotfiles/bashrc
-
 export EDITOR=hx;
 
 # If not running interactively, don't do anything
