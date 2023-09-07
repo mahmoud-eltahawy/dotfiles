@@ -52,6 +52,7 @@
         (command: Execute, value: "alacritty -e hx", modifier: ["modkey"], key: "o"),
         (command: Execute, value: "setxkbmap us", modifier: ["modkey"], key: "space"),
         (command: Execute, value: "setxkbmap ara", modifier: ["modkey", "Control"], key: "space"),
+        (command: Execute, value: "polybar-msg cmd toggle", modifier: ["modkey"], key: "b"),
         (command: MoveToLastWorkspace, value: "", modifier: ["modkey", "Shift"], key: "w"),
         (command: SwapTags, value: "", modifier: ["modkey"], key: "w"),
         (command: MoveWindowTop, value: "", modifier: ["modkey","Shift"], key: "Return"),

@@ -95,6 +95,7 @@
     pavucontrol
 
     polybar
+    gnome.gnome-terminal
     alacritty
     gitui
     lldb
