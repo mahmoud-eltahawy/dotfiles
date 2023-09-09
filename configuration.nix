@@ -94,6 +94,8 @@
     shotgun
     pavucontrol
 
+    surrealdb
+    bun
     polybar
     gnome.gnome-terminal
     alacritty
@@ -135,9 +137,10 @@
     wiki-tui
     sccache
 
-    nodePackages.vscode-langservers-extracted
-    nodePackages.yaml-language-server
-    nodePackages.bash-language-server
+    nodePackages_latest.vscode-langservers-extracted
+    nodePackages_latest.yaml-language-server
+    nodePackages_latest.bash-language-server
+    nodePackages_latest.typescript-language-server
     marksman
 
     nitrogen
