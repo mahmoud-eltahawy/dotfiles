@@ -90,10 +90,10 @@
   environment.systemPackages = with pkgs; [
     dunst
     cloc
-    simplescreenrecorder
-    shotgun
-    pavucontrol
 
+    pandoc
+    ffmpeg
+    gimp
     surrealdb
     bun
     polybar
@@ -106,10 +106,16 @@
     xclip
     vifm-full
     btop
-    mpv
     unzip
-    feh
     sqlx-cli
+    slides
+
+    feh
+    mpv
+    obs-studio
+    pavucontrol
+    shutter    
+    shotgun
 
     brave
     dbeaver

@@ -60,7 +60,7 @@
         (command: MoveWindowDown, value: "", modifier: ["modkey", "Shift"], key: "h"),
         (command: FocusWindowUp, value: "", modifier: ["modkey"], key: "l"),
         (command: FocusWindowDown, value: "", modifier: ["modkey"], key: "h"),
-        (command: NextLayout, value: "", modifier: ["modkey"], key: "f"),
+        (command: NextLayout, value: "", modifier: ["modkey"], key: "n"),
         (command: GotoTag, value: "1", modifier: ["modkey"], key: "1"),
         (command: GotoTag, value: "2", modifier: ["modkey"], key: "2"),
         (command: GotoTag, value: "3", modifier: ["modkey"], key: "3"),

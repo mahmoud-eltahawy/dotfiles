@@ -2,6 +2,13 @@
 
 rustup default stable;
 
+rustup component add \
+    rust-src          \
+    rust-analyzer      ;
+
+rustup target add         \
+    wasm32-unknown-unknown ;
+
 cargo install \
     irust      \
     trunk       \
@@ -11,13 +18,6 @@ cargo install \
     cargo-info      \
     cargo-leptos     \
     create-tauri-app  ;
-
-rustup component add \
-    rust-src          \
-    rust-analyzer      ;
-
-rustup target add         \
-    wasm32-unknown-unknown ;
 
 ln ~/magit/dotfiles/xmonad/xmonad.hs ~/.config/xmonad/xmonad.hs;
 ln ~/magit/dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml;

@@ -33,5 +33,6 @@ ex ()
   fi
 }
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
+alias ls='exa'
+alias fm='vifm'
+alias c='clear'

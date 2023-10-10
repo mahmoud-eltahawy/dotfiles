@@ -105,3 +105,6 @@ let-env NU_PLUGIN_DIRS = [
 ]
 
 let-env PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
+
+alias fm = vifm
+alias c = clear
