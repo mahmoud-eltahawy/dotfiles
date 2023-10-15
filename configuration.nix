@@ -95,7 +95,7 @@
     ffmpeg
     gimp
     surrealdb
-    deno
+    bun
     polybar
     gnome.gnome-terminal
     alacritty
