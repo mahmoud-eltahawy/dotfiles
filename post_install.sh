@@ -28,4 +28,4 @@ ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron
 ln -s ~/magit/dotfiles/leftwm/theme ~/.config/leftwm/themes/current
 ln ~/magit/dotfiles/bash_profile ~/.bash_profile
 
-sudo ln ~/magit/dotfiles/configuration.nix /etc/nixos/configuration.nix;
+# sudo ln ~/magit/dotfiles/configuration.nix /etc/nixos/configuration.nix;
