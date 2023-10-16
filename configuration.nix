@@ -2,9 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+
+
 { config, pkgs, ... }:
 
+let unstableTarball =
+  fetchTarball
+    https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+
+in
 {
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -13,14 +21,15 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+
   hardware.bluetooth.enable = true;
-  networking.hostName = "my_machine"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -43,8 +52,7 @@
   };
 
   virtualisation.docker.enable = true;
-
-  # Configure keymap in X11
+  
   services.xserver = {
     enable = true;
     autorun = true;
@@ -63,20 +71,27 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mahmoude = {
+  users.users.eltahawy = {
     isNormalUser = true;
-    description = "mahmoud eltahawy";
+    description = "eltahawy";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
   # Enable automatic login for the user.
-  services.getty.autologinUser = "mahmoude";
+  services.getty.autologinUser = "eltahawy";
 
-  nix.settings.trusted-users = ["root" "mahmoude"];
+  nix.settings.trusted-users = ["root" "eltahawy"];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };  
+  };
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -94,10 +109,9 @@
     pandoc
     ffmpeg
     gimp
-    surrealdb
-    bun
+    # unstable.surrealdb
+    unstable.bun
     polybar
-    gnome.gnome-terminal
     alacritty
     gitui
     lldb
@@ -117,13 +131,12 @@
     shutter    
     shotgun
 
-    brave
+    google-chrome
     dbeaver
     libreoffice-still
 
     xfce.thunar
-    dmenu-rs
-
+    dmenu
 
     curl
     wget
@@ -143,16 +156,17 @@
     wiki-tui
     sccache
 
-    nodePackages_latest.vscode-langservers-extracted
-    nodePackages_latest.yaml-language-server
-    nodePackages_latest.bash-language-server
-    nodePackages_latest.typescript-language-server
-    marksman
+    unstable.nodePackages_latest.vscode-langservers-extracted
+    unstable.nodePackages_latest.yaml-language-server
+    unstable.nodePackages_latest.bash-language-server
+    unstable.nodePackages_latest.typescript-language-server
+    unstable.marksman
 
-    nitrogen
+    unstable.nitrogen
     picom
   ];
 
+  
   fonts.fonts = with pkgs; [
     fira-code
     fira-mono
