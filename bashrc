@@ -1,6 +1,7 @@
 #!/run/current-system/sw/bin/bash
 
 export EDITOR=hx;
+export PATH=$PATH:~/.cargo/bin:~/.bun/bin;
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -35,4 +36,5 @@ ex ()
 
 alias ls='exa'
 alias fm='vifm'
+alias hx='helix'
 alias c='clear'

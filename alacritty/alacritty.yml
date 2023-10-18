@@ -56,7 +56,7 @@ selection:
 shell:
  args:
    - --login
- program: /run/current-system/sw/bin/bash
+ program: /usr/bin/bash
 
 # * Window
 # - opacity = 0.0..1.0  => transparent..opaque

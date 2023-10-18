@@ -146,7 +146,7 @@ in
     cmake
 
     rustup
-    taplo
+    taplo-cli
     bat
     nushell
     zellij
