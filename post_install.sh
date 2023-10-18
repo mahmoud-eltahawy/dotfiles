@@ -55,6 +55,7 @@ cd ~
 
 paru -S unzip \
     lldb \
+    ntfs-3g \
     marksman \
     nitrogen \
     picom \
