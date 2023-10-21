@@ -1,6 +1,9 @@
 #!/run/current-system/sw/bin/bash
 
-export EDITOR=hx;
+
+eval "$(zoxide init bash)"
+eval "$(starship init bash)"
+export EDITOR=helix;
 export PATH=$PATH:~/.cargo/bin:~/.bun/bin;
 
 # If not running interactively, don't do anything
@@ -34,7 +37,11 @@ ex ()
   fi
 }
 
-alias ls='exa'
 alias fm='vifm'
 alias hx='helix'
 alias c='clear'
+alias cd='z'
+alias ls='exa'
+alias find='fd'
+alias cat='bat'
+alias cloc='tokei'

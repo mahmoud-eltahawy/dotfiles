@@ -2,6 +2,23 @@
 #
 # version = "0.85.0"
 
+def wifi_connect [ssid?,password?] {
+    if $ssid == null and $password == null {
+        nmcli device;
+        nmcli device wifi;
+    } else if $ssid != null and $password == null {
+        nmcli device wifi connect $ssid
+    } else if $ssid != null and $password != null {
+        nmcli device wifi connect $ssid password $password
+    }
+}
+
+def wifi_connect_hidden [ssid?,password?] {
+    if $ssid != null and $password != null {
+        nmcli device wifi connect $ssid password $password hidden yes
+    }
+}
+
 def create_left_prompt [] {
     let home =  $nu.home-path
 
@@ -80,5 +97,7 @@ alias c = clear
 alias hx = helix
 
 
+mkdir ~/.cache/starship
+starship init nu | save -f ~/.cache/starship/init.nu
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')

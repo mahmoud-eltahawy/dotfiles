@@ -15,7 +15,17 @@ sudo pacman -S --needed \
     librsvg \
     libvips
 
-sudo pacman -S rustup;
+sudo pacman -S rustup \ 
+    deno \
+    sd \
+    fd \
+    fzf \
+    zoxide \
+    git-delta \
+    starship \
+    ttf-fira-code \
+    nerd-fonts \
+    tokei;
 
 rustup default stable;
 
@@ -54,6 +64,9 @@ makepkg -si
 cd ~
 
 paru -S unzip \
+    nodejs \
+    npm \
+    bun-bin \
     lldb \
     ntfs-3g \
     marksman \
@@ -75,12 +88,12 @@ paru -S unzip \
     vifm \
     jq \
     dunst \
-    cloc \
-    nodejs \
-    npm ;
-
+    ttf-amiri \
+    ttf-arabeyes-fonts \
+    ttf-qurancomplex-fonts ;
 
 bun install -g yaml-language-server
+    vscode-langservers-extracted
     bash-language-server
     typescript-language-server;
 
@@ -92,3 +105,5 @@ ln ~/magit/dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml;
 ln ~/magit/dotfiles/nushell/config.nu ~/.config/nushell/config.nu;
 ln ~/magit/dotfiles/nushell/env.nu ~/.config/nushell/env.nu;
 ln ~/magit/dotfiles/bash_profile ~/.bash_profile
+
+bat ~/magit/dotfiles/gitconfig >> ~/.gitconfig
