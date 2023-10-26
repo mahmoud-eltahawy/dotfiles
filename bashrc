@@ -1,13 +1,13 @@
 #!/run/current-system/sw/bin/bash
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 export EDITOR=helix;
 export PATH=$PATH:~/.cargo/bin:~/.bun/bin;
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 #ignore upper and lowercase when TAB completion
 bind "set completion-ignore-case on"

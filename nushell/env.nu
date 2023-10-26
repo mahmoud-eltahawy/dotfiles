@@ -95,6 +95,10 @@ $env.NU_PLUGIN_DIRS = [
 alias fm = vifm
 alias c = clear
 alias hx = helix
+alias find = fd
+alias cat = bat
+alias cloc = tokei
+
 
 
 mkdir ~/.cache/starship

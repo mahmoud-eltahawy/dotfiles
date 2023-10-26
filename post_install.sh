@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-# tauri dependencies
+# tauri and leptos dependencies
 sudo pacman -Syu
 sudo pacman -S --needed \
     webkit2gtk \
@@ -13,7 +13,8 @@ sudo pacman -S --needed \
     gtk3 \
     libappindicator-gtk3 \
     librsvg \
-    libvips
+    libvips \
+    openssl-1.1;
 
 sudo pacman -S rustup \ 
     deno \
@@ -25,6 +26,7 @@ sudo pacman -S rustup \
     starship \
     ttf-fira-code \
     nerd-fonts \
+    dosfstools \
     tokei;
 
 rustup default stable;
@@ -52,7 +54,8 @@ cargo install \
     tauri-cli             \
     leptosfmt              \  
     cargo-info              \  # not installed
-    cargo-leptos             \ # not installed
+    cargo-watch              \
+    cargo-leptos              \ 
     create-tauri-app          ;
 
 
@@ -65,7 +68,6 @@ cd ~
 
 paru -S unzip \
     nodejs \
-    npm \
     bun-bin \
     lldb \
     ntfs-3g \
@@ -92,11 +94,12 @@ paru -S unzip \
     ttf-arabeyes-fonts \
     ttf-qurancomplex-fonts ;
 
-bun install -g yaml-language-server
-    vscode-langservers-extracted
-    bash-language-server
+bun install -g yaml-language-server\
+    vscode-langservers-extracted\
+    bash-language-server\
     typescript-language-server;
 
+ln magit/dotfiles/helix/languages.toml .config/helix/languages.toml
 ln ~/magit/dotfiles/zellij/config.kdl ~/.config/zellij/config.kdl;
 ln ~/magit/dotfiles/helix/config.toml ~/.config/helix/config.toml
 ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron

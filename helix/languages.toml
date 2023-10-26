@@ -1,0 +1,12 @@
+[[language]]
+name = "rust"
+indent = { tab-width = 2,unit = " "}
+shebangs = ["cargo -Zscript"]
+diagnostic-severity = "Hint"
+
+
+[[language]]
+name = "typescript"
+indent = { tab-width = 2,unit = " "}
+diagnostic-severity = "Hint"
+
