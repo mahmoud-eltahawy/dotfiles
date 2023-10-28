@@ -1,5 +1,7 @@
 #!/run/current-system/sw/bin/bash
 
+export RUSTC_WRAPPER=/home/eltahawy/.cargo/bin/sccache
+ 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
