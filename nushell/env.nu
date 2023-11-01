@@ -2,6 +2,20 @@
 #
 # version = "0.85.0"
 
+def record_screen [target] {
+    ffmpeg -framerate 30 -f x11grab -i :0.0 $"($target).mp4"
+}
+
+def record_voice [target] {
+    ffmpeg -f alsa -ac 2 -i hw:0 $"($target).mp3"
+}
+
+
+def record_both [target] {
+    ffmpeg -framerate 30 -f x11grab -i :0.0 -f alsa -ac 2 -i hw:0 $"($target).mp4"
+}
+
+
 def wifi_connect [ssid?,password?] {
     if $ssid == null and $password == null {
         nmcli device;
