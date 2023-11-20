@@ -8,7 +8,7 @@ export RUSTC_WRAPPER=/home/eltahawy/.cargo/bin/sccache
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 export EDITOR=helix;
-export PATH=$PATH:~/.cargo/bin:~/.bun/bin;
+export PATH=$PATH:~/.cargo/bin:~/.bun/bin:~/go/bin;
 
 
 #ignore upper and lowercase when TAB completion

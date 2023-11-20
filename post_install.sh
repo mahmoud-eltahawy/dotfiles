@@ -3,6 +3,7 @@
 # tauri and leptos dependencies
 sudo pacman -Syu
 sudo pacman -S --needed \
+    go \
     webkit2gtk \
     base-devel \
     curl \
@@ -110,3 +111,5 @@ ln ~/magit/dotfiles/nushell/env.nu ~/.config/nushell/env.nu;
 ln ~/magit/dotfiles/bash_profile ~/.bash_profile
 
 bat ~/magit/dotfiles/gitconfig >> ~/.gitconfig
+
+go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
