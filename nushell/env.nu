@@ -2,6 +2,10 @@
 #
 # version = "0.85.0"
 
+def set_volume [vol] {
+    pactl set-sink-volume 0 $vol;
+}
+
 def record_screen [target] {
     ffmpeg -framerate 30 -f x11grab -i :0.0 $"($target).mp4"
 }
