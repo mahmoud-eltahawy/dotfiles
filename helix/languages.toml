@@ -5,9 +5,6 @@ shebangs = ["cargo -Zscript"]
 diagnostic-severity = "Hint"
 # auto-format = false
 
-[language-server.rust-analyzer.cargo.buildScripts]
-enable = true
-
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
