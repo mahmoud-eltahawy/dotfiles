@@ -2,6 +2,35 @@
 #
 # version = "0.85.0"
 
+
+
+def ex [file_name : string] {
+  let extensions = [
+      ["extension" "command"];
+      ["tar.bz2"   "tar xjf"]
+      ["tar.gz"    "tar xzf"]
+      ["bz2"       "bunzip2"]
+      ["rar"       "unrar x"]
+      ["gz"        "gunzip"] 
+      ["tar"       "tar xf"] 
+      ["tbz2"      "tar xjf"]
+      ["tgz"       "tar xzf"]
+      ["zip"       "unzip"]
+      ["Z"         "uncompress"]
+      ["7z"        "7z x"] 
+      ["deb"       "ar x"] 
+      ["tar.xz"    "tar xf"] 
+      ["tar.zst"   "tar xf"] 
+    ]
+    let command = $extensions | filter {|x| $file_name | str contains $x.extension} | get command | first
+
+    if $command != null {
+        ^$command $file_name
+    } else {
+        echo "not supported format"
+    }
+}
+
 def set_volume [vol] {
     pactl set-sink-volume 0 $vol;
 }

@@ -54,9 +54,7 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
 shell:
- args:
-   - --login
- program: /usr/bin/bash
+ program: /usr/bin/nu
 
 # * Window
 # - opacity = 0.0..1.0  => transparent..opaque
