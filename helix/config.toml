@@ -3,6 +3,7 @@ theme = "ayu_dark"
 [editor]
 line-number = "relative"
 mouse = false
+shell = ["nu","--stdin","-c"]
 
 [editor.lsp]
 display-messages = true
@@ -14,6 +15,7 @@ display-messages = true
 '"' = '"'
 '`' = '`'
 '<' = '>'
+"'" = "'"
 
 [editor.cursor-shape]
 insert = "bar"

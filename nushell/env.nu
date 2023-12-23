@@ -2,7 +2,14 @@
 #
 # version = "0.85.0"
 
-
+def enc [file_name] {
+    if ($file_name | str contains 'enc') {
+        openssl enc -in $file_name -aes-256-cbc -d out> ($file_name | str replace '.enc' '')
+    } else {
+        openssl enc -in $file_name -aes-256-cbc out> ($file_name + '.enc')
+    }
+    rm $file_name
+}
 
 def ex [file_name : string] {
   let extensions = [
@@ -138,17 +145,16 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-
 alias fm = vifm
-alias c = clear
-alias hx = helix
-alias find = fd
+alias hx = helix --config ~/magit/dotfiles/helix/config.toml
 alias cat = bat
 alias cloc = tokei
 
-
-
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
+
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
+def add_path [path : string] {
+    $env.PATH = ($env.PATH | split row (char esep) | prepend $path)
+}

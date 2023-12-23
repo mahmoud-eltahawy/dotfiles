@@ -1,15 +1,3 @@
-
-# * Bell
-# - animation = Ease , EaseOut , EaseOutSine , EaseOutQuad , EaseOutCubic , EaseOutQuart, EaseOutQuint , EaseOutExpo , EaseOutCirc or Linear
-#   - command example
-#   bell:
-#     command:
-#         program: notify-send
-#         args: ["peace"]
-bell:
-  animation: EaseOutCubic
-  duration: 400
-
 colors:
   transparent_background_colors: true
 
@@ -55,6 +43,10 @@ selection:
 
 shell:
  program: /usr/bin/nu
+ args: [
+  "--config", "~/magit/dotfiles/nushell/config.nu",
+  "--env-config","~/magit/dotfiles/nushell/env.nu"
+  ]
 
 # * Window
 # - opacity = 0.0..1.0  => transparent..opaque
