@@ -1,46 +1,43 @@
-let packages = [ 
-  ["command" "packages"];
+const file_name = '.sys-status.sqlite'
+const packages = [ 
+  ["root" "command" "packages"];
   [
-    "sudo pacman -S --needed"
-    {
-      "tauri": [
-        webkit2gtk
-        base-devel
-        curl
-        wget
-        file
-        openssl
-        appmenu-gtk-module
-        gtk3
-        libappindicator-gtk3
-        librsvg
-        libvips
-      ]
-      "others":[
-        go
-        deno
-        sd
-        fd
-        fzf
-        zoxide
-        git-delta
-        starship
-        ttf-fira-code
-        nerd-fonts
-        dosfstools
-        tokei
-        'openssl-1.1'
-      ]
-    }
+    true
+    ['pacman' '-S' '--needed']
+    [
+      webkit2gtk
+      base-devel
+      curl
+      wget
+      file
+      openssl
+      appmenu-gtk-module
+      gtk3
+      libappindicator-gtk3
+      librsvg
+      libvips
+      go
+      deno
+      sd
+      fd
+      fzf
+      git-delta
+      starship
+      ttf-fira-code
+      nerd-fonts
+      dosfstools
+      tokei
+      'openssl-1.1'
+    ]
   ]
   [
-    "cargo install" 
+    false
+    ['cargo' 'install'] 
     [
       bat
       irust
       trunk 
       bacon  
-      zellij  
       du-dust   
       ripgrep    
       wiki-tui    
@@ -54,7 +51,8 @@ let packages = [
     ]
   ]
   [
-    "paru -S --needed" 
+    false
+    ['paru' '-S' '--needed'] 
     [
       unzip
       nodejs
@@ -85,7 +83,8 @@ let packages = [
     ]
   ]
   [
-    "bun install -g" 
+    false
+    ['bun' 'install' '-g'] 
     [
       yaml-language-server
       vscode-langservers-extracted
@@ -93,28 +92,52 @@ let packages = [
     ]
   ]
   [
-    "rustup component add"
+    false
+    ['rustup' 'component' 'add']
     [
       rust-src
       rust-analyzer
     ]
   ]
   [
-    "rustups target add"
+    false
+    ['rustup' 'target' 'add']
     [
       wasm32-unknown-unknown
     ]
   ]
   [
-    "go install"
+    false
+    ['go' 'install']
     [
       "github.com/bufbuild/buf-language-server/cmd/bufls@latest"
     ]
   ]
 ]
 
+def install_package [command_args : list<string>,package : string,--root (-r)] {
+  alias runx = run-external --redirect-combine 
+  let command = $command_args | first
+  let arg1 = $command_args.1?
+  let arg2 = $command_args.2?
+  alias fun = if $root {
+    if ($arg1 != null and $arg2 != null) {
+      runx sudo $command $arg1 $arg2 $package 
+    } else if $arg1 != null {
+      runx sudo $command $arg1 $package 
+    }
+  } else {
+    if ($arg1 != null and $arg2 != null) {
+      runx $command $arg1 $arg2 $package 
+    } else if $arg1 != null {
+      runx $command $arg1 $package 
+    }
+  }
+  fun | complete
+}
+
 def link-configs [] {
-  open ~/magit/dotfiles/gitconfig | save ~/.gitconfig
+  open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
   echo "git configs done. pull git credentials next"
   
   # ln ~/magit/dotfiles/zellij/config.kdl ~/.config/zellij/config.kdl;
@@ -136,4 +159,23 @@ def install-basics [] {
   cd ~
 }
 
-$packages 
+def "main run" [] {
+  if ('~/magit/dotfiles/.sys-status.sqlite' | path exists) {
+    echo 'IMPORT'
+    stor import --file-name $file_name
+  } else {
+    echo 'CREATE'
+    stor create --table-name installed --columns {name : str, updated : bool}
+    stor create --table-name failed --columns {name : str, message : str}
+  }
+
+  rm --force $file_name
+  stor export --file-name $file_name
+  stor reset
+}
+
+def "main test" [] {
+  echo $packages 
+}
+
+def main [] {}

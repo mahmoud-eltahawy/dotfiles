@@ -30,7 +30,7 @@
     layout_mode: Tag,
     insert_behavior: Bottom,
     scratchpad: [
-        (name: "Alacritty", value: "alacritty --config-file ~/magit/dotfiles/alacritty/alacritty.yml", x: 860, y: 390, height: 300, width: 200),
+        (name: "Alacritty", value: "alacritty --config-file ~/magit/dotfiles/alacritty/alacritty.toml", x: 860, y: 390, height: 300, width: 200),
     ],
     window_rules: [],
     disable_current_tag_swap: false,
@@ -43,7 +43,7 @@
     auto_derive_workspaces: true,
     keybind: [
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
-        (command: Execute, value: "alacritty --config-file ~/magit/dotfiles/alacritty/alacritty.yml", modifier: ["modkey"], key: "Return"),
+        (command: Execute, value: "alacritty --config-file ~/magit/dotfiles/alacritty/alacritty.toml", modifier: ["modkey"], key: "Return"),
         (command: CloseWindow, value: "", modifier: ["modkey"], key: "k"),
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
         (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift"], key: "x"),
