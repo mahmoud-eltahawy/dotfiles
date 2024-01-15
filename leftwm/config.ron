@@ -57,7 +57,7 @@
         (command: Execute, value: "xdotool click --clearmodifiers 3", modifier: ["modkey"], key: "x"),
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "alacritty --config-file ~/magit/dotfiles/alacritty/alacritty.toml", modifier: ["modkey"], key: "Return"),
-        (command: CloseWindow, value: "", modifier: ["modkey"], key: "k"),
+        (command: CloseWindow, value: "", modifier: ["modkey","Shift"], key: "k"),
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
         (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift"], key: "x"),
         (command: Execute, value: "slock", modifier: ["modkey", "Control"], key: "l"),

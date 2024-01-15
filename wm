@@ -1,0 +1,11 @@
+#!/usr/bin/env nu
+
+def main [win? : string] {
+  let xinitrc = $"($env.HOME)/.xinitrc"
+  if $win == null {
+    "exec leftwm" out> $xinitrc
+  } else if $win == "lxde" {
+    "exec startlxde" out> $xinitrc
+  }
+  startx
+}

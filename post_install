@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+
 const file_name = '.sys-status.sqlite'
 const packages = [ 
   ["root" "command" "packages"];
@@ -80,6 +82,8 @@ const packages = [
       ttf-amiri
       ttf-arabeyes-fonts
       ttf-qurancomplex-fonts
+      kdenlive
+      breeze
     ]
   ]
   [
@@ -144,6 +148,7 @@ def link-configs [] {
   ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron
   ln -s ~/magit/dotfiles/leftwm/theme ~/.config/leftwm/themes/current
   ln ~/magit/dotfiles/bash_profile ~/.bash_profile
+  sudo ln ~/magit/dotfiles/wm /usr/local/bin/wm
 }
 
 def install-basics [] {
