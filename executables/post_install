@@ -148,7 +148,8 @@ def link-configs [] {
   ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron
   ln -s ~/magit/dotfiles/leftwm/theme ~/.config/leftwm/themes/current
   ln ~/magit/dotfiles/bash_profile ~/.bash_profile
-  sudo ln ~/magit/dotfiles/wm /usr/local/bin/wm
+  sudo ln ~/magit/dotfiles/executables/wm /usr/local/bin/wm
+  sudo ln ~/magit/dotfiles/executables/snip /usr/local/bin/snip
 }
 
 def install-basics [] {
