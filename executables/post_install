@@ -23,12 +23,14 @@ const packages = [
       sd
       fd
       fzf
+      unzip
       git-delta
       starship
       ttf-fira-code
       nerd-fonts
       dosfstools
       tokei
+      firefox
       'openssl-1.1'
     ]
   ]
@@ -38,17 +40,17 @@ const packages = [
     [
       bat
       irust
-      trunk 
-      bacon  
-      du-dust   
-      ripgrep    
-      wiki-tui    
-      taplo-cli    
-      tauri-cli     
-      leptosfmt        
+      trunk
+      bacon
+      du-dust
+      ripgrep
+      wiki-tui
+      taplo-cli
+      tauri-cli
+      leptosfmt
       cargo-info
-      cargo-watch      
-      cargo-leptos       
+      cargo-watch
+      cargo-leptos
       create-tauri-app
     ]
   ]
@@ -56,7 +58,10 @@ const packages = [
     false
     ['paru' '-S' '--needed'] 
     [
-      unzip
+      gitui
+      wine
+      nushell
+      leftwm
       nodejs
       bun-bin
       lldb
@@ -66,7 +71,6 @@ const packages = [
       picom
       thunar
       dmenu
-      google-chrome
       libreoffice-still
       shutter    
       shotgun
@@ -84,6 +88,7 @@ const packages = [
       ttf-qurancomplex-fonts
       kdenlive
       breeze
+      polybar
     ]
   ]
   [
