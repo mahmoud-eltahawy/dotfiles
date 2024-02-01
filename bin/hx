@@ -1,0 +1,9 @@
+#!/usr/bin/nu
+
+def main [mypath? : path] {
+    if $mypath == null {
+      helix --config ~/magit/dotfiles/helix/config.toml
+    } else {
+      helix --config ~/magit/dotfiles/helix/config.toml $mypath
+    }
+}

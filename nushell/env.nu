@@ -145,7 +145,6 @@ $env.NU_PLUGIN_DIRS = [
 ]
 
 alias fm = vifm
-alias hx = helix --config ~/magit/dotfiles/helix/config.toml
 alias cat = bat
 alias cloc = tokei
 
