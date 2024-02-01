@@ -32,6 +32,7 @@ const packages = [
       tokei
       firefox
       'openssl-1.1'
+      xclip
     ]
   ]
   [
@@ -83,12 +84,12 @@ const packages = [
       btop
       vifm
       dunst
-      ttf-amiri
-      ttf-arabeyes-fonts
-      ttf-qurancomplex-fonts
+      all-repository-fonts
       kdenlive
       breeze
       polybar
+      python-lsp-server
+      python-pylsp-mypy
     ]
   ]
   [
@@ -149,12 +150,13 @@ def link-configs [] {
   open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
   echo "git configs done. pull git credentials next"
   
-  # ln ~/magit/dotfiles/zellij/config.kdl ~/.config/zellij/config.kdl;
   ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron
   ln -s ~/magit/dotfiles/leftwm/theme ~/.config/leftwm/themes/current
   ln ~/magit/dotfiles/bash_profile ~/.bash_profile
-  sudo ln ~/magit/dotfiles/executables/wm /usr/local/bin/wm
-  sudo ln ~/magit/dotfiles/executables/snip /usr/local/bin/snip
+  ln ~/magit/dotfiles/bashrc ~/.bashrc
+
+  sudo rm -rf /usr/local/bin
+  sudo ln -s ~/magit/dotfiles/bin /usr/local/
 }
 
 def install-basics [] {

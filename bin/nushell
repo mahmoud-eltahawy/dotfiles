@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+nu --config ~/magit/dotfiles/nushell/config.nu --env-config ~/magit/dotfiles/nushell/env.nu

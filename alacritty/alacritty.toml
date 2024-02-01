@@ -38,15 +38,6 @@ hide_when_typing = true
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
-[shell]
-program = "/usr/bin/nu"
-args = [
-  "--config",
-  "~/magit/dotfiles/nushell/config.nu",
-  "--env-config",
-  "~/magit/dotfiles/nushell/env.nu"
-]
-
 [window]
 decorations = "none"
 decorations_theme_variant = "Dark"
