@@ -157,6 +157,7 @@ def link-configs [] {
 
   sudo rm -rf /usr/local/bin
   sudo ln -s ~/magit/dotfiles/bin /usr/local/
+  sudo ln -s ~/magit/dotfiles/nvim ~/.config/
 }
 
 def install-basics [] {
