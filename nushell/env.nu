@@ -147,6 +147,7 @@ $env.NU_PLUGIN_DIRS = [
 alias fm = vifm
 alias cat = bat
 alias cloc = tokei
+alias q = exit 
 
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
