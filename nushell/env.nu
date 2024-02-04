@@ -148,6 +148,7 @@ alias fm = vifm
 alias cat = bat
 alias cloc = tokei
 alias q = exit 
+alias zel = zellij --config ~/magit/dotfiles/zellij/config.kdl
 
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu

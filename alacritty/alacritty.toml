@@ -31,6 +31,9 @@ style = "Italic"
 family = "firacode"
 style = "Regular"
 
+[shell]
+program = "nushell"
+
 [mouse]
 hide_when_typing = true
 

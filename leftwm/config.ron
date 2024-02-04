@@ -56,6 +56,7 @@
         (command: Execute, value: "xdotool click 1", modifier: ["modkey", "Shift"], key: "z"),
         (command: Execute, value: "xdotool click --clearmodifiers 3", modifier: ["modkey"], key: "x"),
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
+        (command: Execute, value: "emacsclient -c", modifier: ["modkey"], key: "e"),
         (command: Execute, value: "alacritty --config-file ~/magit/dotfiles/alacritty/alacritty.toml", modifier: ["modkey"], key: "Return"),
         (command: CloseWindow, value: "", modifier: ["modkey","Shift"], key: "k"),
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
