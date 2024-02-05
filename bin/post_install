@@ -153,8 +153,6 @@ def link-configs [] {
   ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron
   ln -s ~/magit/dotfiles/leftwm/theme ~/.config/leftwm/themes/current
   ln ~/magit/dotfiles/bash_profile ~/.bash_profile
-  ln ~/magit/dotfiles/bashrc ~/.bashrc
-  ln ~/magit/dotfiles/emacs.el ~/.emacs.el
 
   sudo rm -rf /usr/local/bin
   sudo ln -s ~/magit/dotfiles/bin /usr/local/

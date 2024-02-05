@@ -27,12 +27,12 @@ hidden = false
 
 [keys.insert]
 "A-j" = "normal_mode"
+"A-k" = ":bc"
+"A-K" = ":bc!"
 
-[keys.normal."C-t"]
-f = ":pipe deno fmt -"
-
-[keys.normal."C-r"]
-b = ":sh cargo build"
+[keys.normal]
+"A-k" = ":bc"
+"A-K" = ":bc!"
 
 [keys.normal.z]
 j = "scroll_up"

@@ -7,5 +7,4 @@ leftwm-command "UnloadTheme"
 pkill picom
 pkill polybar
 pkill nitrogen
-pkill emacs 
 
