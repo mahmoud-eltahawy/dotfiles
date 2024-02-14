@@ -32,7 +32,9 @@ const packages = [
       tokei
       firefox
       'openssl-1.1'
-      xclip
+      wl-screenrec
+      wl-clipboard
+      cliphist
     ]
   ]
   [
@@ -62,16 +64,13 @@ const packages = [
       gitui
       wine
       nushell
-      leftwm
       nodejs
       bun-bin
       lldb
       ntfs-3g
       marksman
-      nitrogen
-      picom
       thunar
-      dmenu
+      wofi
       libreoffice-still
       shutter    
       shotgun
@@ -87,7 +86,7 @@ const packages = [
       all-repository-fonts
       kdenlive
       breeze
-      polybar
+      waybar
       python-lsp-server
       python-pylsp-mypy
     ]
