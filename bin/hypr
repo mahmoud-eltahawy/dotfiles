@@ -1,0 +1,4 @@
+#!/usr/bin/nu
+
+Hyprland -c ~/magit/dotfiles/hypr/hyprland.conf
+

@@ -85,6 +85,8 @@ const packages = [
       waybar
       python-lsp-server
       python-pylsp-mypy
+      audacity
+      gimp
     ]
   ]
   [
@@ -145,8 +147,6 @@ def link-configs [] {
   open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
   echo "git configs done. pull git credentials next"
   
-  ln ~/magit/dotfiles/leftwm/config.ron ~/.config/leftwm/config.ron
-  ln -s ~/magit/dotfiles/leftwm/theme ~/.config/leftwm/themes/current
   ln ~/magit/dotfiles/bash_profile ~/.bash_profile
 
   sudo rm -rf /usr/local/bin
@@ -159,7 +159,6 @@ def install-basics [] {
   pacman -S rustup
   rustup default stable
   cargo install sccache
-  cargo install nu
   cd ~
   git clone https://aur.archlinux.org/paru.git
   cd paru
