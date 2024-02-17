@@ -34,6 +34,7 @@ const packages = [
       'openssl-1.1'
       wl-clipboard
       cliphist
+      hyprland
     ]
   ]
   [
