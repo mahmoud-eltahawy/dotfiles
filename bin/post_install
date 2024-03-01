@@ -1,189 +1,30 @@
 #!/usr/bin/env nu
 
-const file_name = '.sys-status.sqlite'
-const packages = [ 
-  ["root" "command" "packages"];
-  [
-    true
-    ['pacman' '-S' '--needed']
-    [
-      webkit2gtk
-      base-devel
-      curl
-      wget
-      file
-      openssl
-      appmenu-gtk-module
-      gtk3
-      libappindicator-gtk3
-      librsvg
-      libvips
-      go
-      deno
-      sd
-      fd
-      fzf
-      unzip
-      git-delta
-      starship
-      ttf-fira-code
-      nerd-fonts
-      dosfstools
-      tokei
-      firefox
-      'openssl-1.1'
-      wl-clipboard
-      cliphist
-      hyprland
-    ]
-  ]
-  [
-    false
-    ['cargo' 'install'] 
-    [
-      bat
-      irust
-      trunk
-      bacon
-      du-dust
-      ripgrep
-      wiki-tui
-      taplo-cli
-      tauri-cli
-      leptosfmt
-      cargo-info
-      cargo-watch
-      cargo-leptos
-      create-tauri-app
-    ]
-  ]
-  [
-    false
-    ['paru' '-S' '--needed'] 
-    [
-      gitui
-      wine
-      grim
-      nushell
-      nodejs
-      bun-bin
-      lldb
-      ntfs-3g
-      marksman
-      thunar
-      wofi
-      wl-screenrec
-      ffmpeg
-      mpv
-      pavucontrol
-      feh
-      slides
-      sqlx-cli
-      btop
-      vifm
-      dunst
-      all-repository-fonts
-      waybar
-      python-lsp-server
-      python-pylsp-mypy
-      audacity
-      gimp
-    ]
-  ]
-  [
-    false
-    ['bun' 'install' '-g'] 
-    [
-      yaml-language-server
-      vscode-langservers-extracted
-      typescript-language-server
-    ]
-  ]
-  [
-    false
-    ['rustup' 'component' 'add']
-    [
-      rust-src
-      rust-analyzer
-    ]
-  ]
-  [
-    false
-    ['rustup' 'target' 'add']
-    [
-      wasm32-unknown-unknown
-    ]
-  ]
-  [
-    false
-    ['go' 'install']
-    [
-      "github.com/bufbuild/buf-language-server/cmd/bufls@latest"
-    ]
-  ]
-]
 
-def install_package [command_args : list<string>,package : string,--root (-r)] {
-  alias runx = run-external --redirect-combine 
-  let command = $command_args | first
-  let arg1 = $command_args.1?
-  let arg2 = $command_args.2?
-  alias fun = if $root {
-    if ($arg1 != null and $arg2 != null) {
-      runx sudo $command $arg1 $arg2 $package 
-    } else if $arg1 != null {
-      runx sudo $command $arg1 $package 
-    }
-  } else {
-    if ($arg1 != null and $arg2 != null) {
-      runx $command $arg1 $arg2 $package 
-    } else if $arg1 != null {
-      runx $command $arg1 $package 
-    }
-  }
-  fun | complete
-}
+rustup default stable
 
-def link-configs [] {
-  open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
-  echo "git configs done. pull git credentials next"
-  
-  ln ~/magit/dotfiles/bash_profile ~/.bash_profile
+cd ~
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd ~
 
-  sudo rm -rf /usr/local/bin
-  sudo ln -s ~/magit/dotfiles/bin /usr/local/
-  sudo ln -s ~/magit/dotfiles/nvim ~/.config/
-}
+sudo pacman -Sy --needed qt6-wayland qt5-wayland webkit2gtk base-devel curl wget file openssl appmenu-gtk-module gtk3 libappindicator-gtk3 librsvg libvips go deno sd fd fzf unzip git-delta starship ttf-fira-code nerd-fonts dosfstools tokei firefox 'openssl-1.1' wl-clipboard cliphist hyprland alacritty
 
-def install-basics [] {
-  pacman -Syu
-  pacman -S rustup
-  rustup default stable
-  cargo install sccache
-  cd ~
-  git clone https://aur.archlinux.org/paru.git
-  cd paru
-  makepkg -si
-  cd ~
-}
+paru -S --needed gitui wine grim nushell nodejs bun-bin lldb ntfs-3g marksman thunar wofi wl-screenrec ffmpeg mpv pavucontrol feh slides sqlx-cli btop vifm dunst all-repository-fonts waybar python-lsp-server python-pylsp-mypy audacity gimp
 
-def "main run" [] {
-  if ('~/magit/dotfiles/.sys-status.sqlite' | path exists) {
-    echo 'IMPORT'
-    stor import --file-name $file_name
-  } else {
-    echo 'CREATE'
-    stor create --table-name installed --columns {name : str, updated : bool}
-    stor create --table-name failed --columns {name : str, message : str}
-  }
+bun install -g  yaml-language-server vscode-langservers-extracted typescript-language-server
 
-  rm --force $file_name
-  stor export --file-name $file_name
-  stor reset
-}
+rustup target add wasm32-unknown-unknown
+rustup component add rust-src rust-analyzer
 
-def "main test" [] {
-  echo $packages 
-}
+go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 
-def main [] {}
+cargo install sccache 
+cargo install bat irust trunk bacon du-dust ripgrep wiki-tui taplo-cli tauri-cli leptosfmt cargo-info cargo-watch cargo-leptos create-tauri-app
+
+
+open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
+# git configs done. pull git credentials next
+
+ln ~/magit/dotfiles/bash_profile ~/.bash_profile
