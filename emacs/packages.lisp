@@ -10,6 +10,10 @@
 
   (defconst mt/packages
     '(flycheck
+      typescript-mode
+      csharp-mode
+      company
+      yasnippet      
       all-the-icons
       nerd-icons-dired
       general

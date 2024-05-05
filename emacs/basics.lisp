@@ -12,6 +12,7 @@
 
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
+(setq-default indent-tabs-mode nil)
 
 (defun sudo-find-file (file-name)
   "Like find file, but opens the file as root."
