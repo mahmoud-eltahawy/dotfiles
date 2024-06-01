@@ -19,3 +19,7 @@
 [user]
 	email = gemmy9300@gmail.com
 	name = mahmoud-eltahawy
+[credential]
+	helper = store
+[alias]
+	pr = pull --rebase

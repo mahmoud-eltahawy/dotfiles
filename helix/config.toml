@@ -31,6 +31,7 @@ hidden = false
 "A-K" = ":bc!"
 
 [keys.normal]
+C-g = [":new", ":insert-output gitu", ":buffer-close!", ":redraw"]
 "A-k" = ":bc"
 "A-K" = ":bc!"
 
