@@ -1,6 +1,7 @@
 use task.nu;
 use theme.nu;
 use starship_init.nu
+use keybindings.nu
 use mt.nu;
 
 # The default config record. This is where much of your global configuration is setup.
@@ -37,7 +38,7 @@ $env.config = {
     # showing something like "a day ago."
     datetime_format: {
         # normal: '%a, %d %b %Y %H:%M:%S %z'    # shows up in displays of variables or other datetime's outside of tables
-        table: '%m/%d/%y %I:%M:%S%p'          # generally shows up in tabular outputs such as ls. commenting this out will change it to the default human readable datetime format
+        table: '%m-%d %I:%M %p'          # generally shows up in tabular outputs such as ls. commenting this out will change it to the default human readable datetime format
     }
 
     explore: {
@@ -68,7 +69,7 @@ $env.config = {
         case_sensitive: false # set to true to enable case-sensitive completions
         quick: true    # set this to false to prevent auto-selecting completions when only one remains
         partial: true    # set this to false to prevent partial filling of the prompt
-        algorithm: "prefix"    # prefix or fuzzy
+        algorithm: "fuzzy"    # prefix or fuzzy
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
@@ -77,7 +78,7 @@ $env.config = {
     }
 
     filesize: {
-        metric: false # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
+        metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
         format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
     }
 
@@ -86,7 +87,6 @@ $env.config = {
         vi_normal: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
     }
 
-    color_config: $theme # if you want a more interesting theme, you can replace the empty record with `$theme`,
     use_grid_icons: true
     footer_mode: "25" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
@@ -187,105 +187,10 @@ $env.config = {
             }
         }
     ]
-
-    keybindings: [
-        {
-            name: completion_menu
-            modifier: none
-            keycode: tab
-            mode: vi_insert
-            event: {
-                until: [
-                    { send: menu name: completion_menu }
-                    { send: menunext }
-                    { edit: complete }
-                ]
-            }
-        }
-        {
-            name: history_menu
-            modifier: control
-            keycode: char_r
-            mode: [vi_insert vi_normal]
-            event: { send: menu name: history_menu }
-        }
-        {
-            name: help_menu
-            modifier: none
-            keycode: f1
-            mode: [vi_insert vi_normal]
-            event: { send: menu name: help_menu }
-        }
-        {
-            name: completion_previous_menu
-            modifier: shift
-            keycode: backtab
-            mode: [vi_normal vi_insert]
-            event: { send: menuprevious }
-        }
-        {
-            name: escape
-            modifier: none
-            keycode: escape
-            mode: [vi_normal vi_insert]
-            event: { send: esc }    # NOTE: does not appear to work
-        }
-        {
-            name: cancel_command
-            modifier: control
-            keycode: char_c
-            mode: [vi_normal vi_insert]
-            event: { send: ctrlc }
-        }
-        {
-            name: quit_shell
-            modifier: control
-            keycode: char_d
-            mode: [vi_normal vi_insert]
-            event: { send: ctrld }
-        }
-        {
-            name: clear_screen
-            modifier: control
-            keycode: char_l
-            mode: [vi_normal vi_insert]
-            event: { send: clearscreen }
-        }
-        {
-            name: search_history
-            modifier: alt
-            keycode: char_s
-            mode: [vi_normal vi_insert]
-            event: { send: searchhistory }
-        }
-        {
-            name: open_command_editor
-            modifier: alt
-            keycode: char_o
-            mode: [vi_normal vi_insert]
-            event: { send: openeditor }
-        }
-        {
-            name: line_auto_complete_take
-            modifier: alt
-            keycode: char_l
-            mode: [vi_normal vi_insert]
-            event: {
-                until: [
-                    {send: historyhintcomplete}
-                ]
-            }
-        }
-        {
-            name: word_auto_complete_take
-            modifier: alt
-            keycode: char_w
-            mode: [vi_normal vi_insert]
-            event: {
-                until: [
-                    {send: historyhintwordcomplete}
-                ]
-            }
-        }
-    ]
 }
+
+$env.config = ($env.config | merge {
+        color_config: (theme)
+        keybindings: (keybindings)
+    }
+)
