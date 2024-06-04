@@ -1,6 +1,5 @@
 #!/usr/bin/env nu
 
-
 rustup default stable
 
 cd ~
@@ -9,9 +8,9 @@ cd paru
 makepkg -si
 cd ~
 
-sudo pacman -Sy --needed qt6-wayland qt5-wayland webkit2gtk base-devel curl wget file openssl appmenu-gtk-module gtk3 libappindicator-gtk3 librsvg libvips go deno sd fd fzf unzip git-delta starship ttf-fira-code nerd-fonts dosfstools tokei firefox 'openssl-1.1' wl-clipboard cliphist hyprland alacritty
+sudo pacman -Sy --needed qt6-wayland qt5-wayland webkit2gtk base-devel curl wget file openssl appmenu-gtk-module gtk3 libappindicator-gtk3 librsvg libvips go deno sd fd fzf unzip git-delta starship ttf-fira-code nerd-fonts dosfstools tokei firefox 'openssl-1.1' wl-clipboard cliphist hyprland alacritty pueue
 
-paru -S --needed gitui wine grim nushell nodejs bun-bin lldb ntfs-3g marksman thunar wofi wl-screenrec ffmpeg mpv pavucontrol feh slides sqlx-cli btop vifm dunst all-repository-fonts waybar python-lsp-server python-pylsp-mypy audacity gimp
+paru -S --needed gitu wine grim nushell nodejs bun-bin lldb ntfs-3g marksman thunar wofi wl-screenrec ffmpeg mpv pavucontrol feh slides sqlx-cli btop vifm dunst all-repository-fonts waybar python-lsp-server python-pylsp-mypy audacity gimp
 
 bun install -g  yaml-language-server vscode-langservers-extracted typescript-language-server
 
