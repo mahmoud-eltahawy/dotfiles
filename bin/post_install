@@ -20,7 +20,7 @@ rustup component add rust-src rust-analyzer
 go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 
 cargo install sccache 
-cargo install bat irust trunk bacon du-dust ripgrep wiki-tui taplo-cli tauri-cli leptosfmt cargo-info cargo-watch cargo-leptos create-tauri-app
+cargo install bat irust trunk bacon du-dust ripgrep wiki-tui taplo-cli tauri-cli leptosfmt cargo-info cargo-watch cargo-leptos create-tauri-app gitoxide
 
 
 open ~/magit/dotfiles/gitconfig out> ~/.gitconfig

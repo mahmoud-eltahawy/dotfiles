@@ -4,7 +4,7 @@ live_config_reload = false
 transparent_background_colors = true
 
 [cursor]
-thickness = 0.0
+thickness = 0.2
 unfocused_hollow = true
 vi_mode_style = "Block"
 
@@ -44,8 +44,8 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 [window]
 decorations = "none"
 decorations_theme_variant = "Dark"
-opacity = 0.66
+opacity = 0.8
 
 [window.padding]
 x = 20
-y = 20
+y = 0
