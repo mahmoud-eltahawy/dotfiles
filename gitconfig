@@ -23,3 +23,5 @@
 	helper = store
 [alias]
 	pr = pull --rebase
+[init]
+	defaultBranch = main
