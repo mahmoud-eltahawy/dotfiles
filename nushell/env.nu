@@ -67,7 +67,7 @@ $env.NU_PLUGIN_DIRS = [
     "~/magit/dotfiles/nushell/plugins"
 ]
 
-alias fm = vifm
+alias fm = joshuto
 alias cat = bat
 alias cloc = tokei
 alias q = exit 
