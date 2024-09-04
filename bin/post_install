@@ -10,7 +10,7 @@ cd ~
 
 sudo pacman -Sy --needed qt6-wayland qt5-wayland webkit2gtk base-devel curl wget file openssl appmenu-gtk-module gtk3 libappindicator-gtk3 librsvg libvips go deno sd fd fzf unzip git-delta starship ttf-fira-code nerd-fonts dosfstools tokei firefox 'openssl-1.1' wl-clipboard cliphist hyprland hyprpaper alacritty pueue docker
 
-paru -S --needed gitu wine grim nushell nodejs bun-bin lldb ntfs-3g marksman thunar wofi wl-screenrec ffmpeg mpv pavucontrol feh slides sqlx-cli btop dunst all-repository-fonts waybar python-lsp-server python-pylsp-mypy audacity gimp hyprpicker
+paru -S --needed gitu wine grim nushell nodejs bun-bin lldb ntfs-3g marksman thunar bemenu-wayland wl-screenrec ffmpeg mpv pavucontrol feh slides sqlx-cli btop dunst all-repository-fonts waybar python-lsp-server python-pylsp-mypy audacity gimp hyprpicker
 
 bun install -g  yaml-language-server vscode-langservers-extracted typescript-language-server
 
