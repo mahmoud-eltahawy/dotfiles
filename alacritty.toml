@@ -45,7 +45,3 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 decorations = "none"
 decorations_theme_variant = "Dark"
 opacity = 0.8
-
-[window.padding]
-x = 20
-y = 0

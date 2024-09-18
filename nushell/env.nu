@@ -71,7 +71,6 @@ alias fm = joshuto
 alias cat = bat
 alias cloc = tokei
 alias q = exit 
-alias zel = zellij --config ~/magit/dotfiles/zellij/config.kdl
 
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:

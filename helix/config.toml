@@ -1,4 +1,4 @@
-theme = "ayu_dark"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
@@ -26,15 +26,16 @@ select = "underline"
 hidden = false
 
 [keys.insert]
-"A-j" = "normal_mode"
-"A-k" = ":bc"
-"A-K" = ":bc!"
+C-i = "normal_mode"
+A-k = ":bc"
+A-K = ":bc!"
 
 [keys.normal]
-C-g = [":new", ":insert-output gitu", ":buffer-close!", ":redraw"]
-"A-k" = ":bc"
-"A-K" = ":bc!"
+C-j = "scroll_up"
+C-k = "scroll_down"
+A-k = ":bc"
+A-K = ":bc!"
 
-[keys.normal.z]
-j = "scroll_up"
-k = "scroll_down"
+[keys.normal.space.m]
+g = [":new", ":insert-output gitu", ":buffer-close!", ":redraw"] 
+f = [":new", ":insert-output joshuto", ":buffer-close!", ":redraw"]
