@@ -1,15 +1,6 @@
 #!/usr/bin/env nu
 
-rustup default stable
-
-cd ~
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-cd ~
-
-(
-sudo pacman -Sy --needed
+(sudo pacman -Sy --needed
   qt6-wayland
   qt5-wayland
   webkit2gtk
@@ -24,7 +15,6 @@ sudo pacman -Sy --needed
   librsvg
   libvips
   go
-  deno
   sd
   fd
   fzf
@@ -47,65 +37,64 @@ sudo pacman -Sy --needed
   grim
   slurp
   ffmpeg
-)
-
-(
-paru -S --needed
-  gitu
-  nushell
   nodejs
-  lldb
-  ntfs-3g
+  nushell
   marksman
+  lldb
+  gitu
+  ntfs-3g
   thunar
   bemenu-wayland
-  wl-screenrec
   mpv
   pavucontrol
   feh
   sqlx-cli
   btop
-  dunst
-  all-repository-fonts
   waybar
-  hyprpicker
-)
+  bat
+  ripgrep
+  wasm-pack
+  dust
+  sccache
+  dunst)
 
-(
-npm install -g
-  yaml-language-server
-  vscode-langservers-extracted
-  typescript-language-server
-)
-
+rustup default stable
 rustup target add wasm32-unknown-unknown
 rustup component add rust-src rust-analyzer
 
-go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
-
-cargo install sccache 
 sccache --start-server
-(
-cargo install
-  bat
+(cargo install
   irust
   trunk
   bacon
-  du-dust
-  ripgrep
-  wiki-tui
   taplo-cli
   tauri-cli
   leptosfmt
   cargo-info
   cargo-watch
   cargo-leptos
-  sqlx-cli
   create-tauri-app
   gitoxide
-  joshuto
-  wasm-pack
-)
+  joshuto)
+
+
+cd ~
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd ~
+
+(paru -S --needed
+  wl-screenrec
+  all-repository-fonts
+  hyprpicker)
+
+(npm install -g
+  yaml-language-server
+  vscode-langservers-extracted
+  typescript-language-server)
+
+go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
 
 open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
 print 'git configs done. pull git credentials next'

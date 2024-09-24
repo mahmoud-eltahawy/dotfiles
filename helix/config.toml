@@ -26,7 +26,7 @@ select = "underline"
 hidden = false
 
 [keys.insert]
-C-i = "normal_mode"
+A-i = "normal_mode"
 A-k = ":bc"
 A-K = ":bc!"
 
