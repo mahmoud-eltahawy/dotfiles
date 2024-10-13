@@ -3,10 +3,6 @@
 # ~/.bash_profile
 #
 
-export BUN_INSTALL="$HOME/.bun"
-export CARGO_INSTALL="$HOME/.cargo"
-export GO_INSTALL="$HOME/.go"
-export MY_DOTFILES="$HOME/magit/dotfiles"
 export EDITOR=hx;
-export PATH=$PATH:$CARGO_INSTALL/bin:$BUN_INSTALL/bin:$GO_INSTALL/bin:$MY_DOTFILES/bin:$DOTNET_TOOLS;
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.bun/bin:$HOME/.go/bin:$HOME/magit/dotfiles/bin:$HOME/.ghcup/bin:$HOME/.cabal/bin;
 export RUSTC_WRAPPER=/usr/bin/sccache
