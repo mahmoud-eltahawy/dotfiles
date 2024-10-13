@@ -12,7 +12,7 @@ getCurrent = read.dropWhile (/= ' ').head.lines <$> readProcess "hyprctl" ["geto
 
 actCurrent :: String -> Float -> IO String
 actCurrent "in" current = zoom $ current + 0.5
-actCurrent "out" current = zoom $ current - 0.5
+actCurrent "out" current | current > 1.0 = zoom $ current - 0.5
 actCurrent _ current = zoom 1.0 
 
 act :: String -> IO String
