@@ -21,10 +21,9 @@ act arg = do
     actCurrent arg current
 
 
-main :: IO()
+main :: IO String
 main = do
     arg <- listToMaybe <$> getArgs
-    _ <- case arg of 
+    case arg of 
         Just arg -> act arg
         Nothing -> act ""
-    print "Ok"
