@@ -1,0 +1,4 @@
+#!/usr/bin/nu
+
+ghc Main.hs -O2 -g0 -o zoom
+mv zoom ../bin
