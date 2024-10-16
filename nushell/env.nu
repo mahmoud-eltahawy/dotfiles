@@ -68,6 +68,7 @@ $env.NU_PLUGIN_DIRS = [
 ]
 
 alias fm = joshuto
+alias hx = helix
 alias cat = bat
 alias cloc = tokei
 alias q = exit 

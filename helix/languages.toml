@@ -1,0 +1,103 @@
+#python
+[language-server.pylsp.config.pylsp.plugins]
+flake8 = {enabled = true, ignore = ["E501"]}
+autopep8 = {enabled = false}
+mccabe = {enabled = false}
+pycodestyle = {enabled = false}
+pyflakes = {enabled = false}
+pylint = {enabled = false}
+yapf = {enabled = false}
+ruff = { enabled = false}
+
+[[language]]
+name = "python"
+language-servers = ["pylsp"]
+roots = [".git"]
+workspace-lsp-roots = ["src/updater"]
+auto-format = true
+
+#javascript
+[language-server.deno-lsp]
+command = "deno"
+args = ["lsp","--quiet"]
+
+[language-server.deno-lsp.config.deno]
+enable = true
+lint = true
+suggest.imports.hosts = { "https://deno.land" = true }
+inlayHints.parameterNames.enabled = "all"
+inlayHints.parameterTypes.enabled = true
+inlayHints.variableTypes.enabled = true
+inlayHints.propertyDeclarationTypes.enabled = true
+inlayHints.functionLikeReturnTypes.enabled = true
+inlayHints.enumMemberValues.enabled = true
+
+[[language]]
+name = "javascript"
+language-id = "javascript"
+scope = "source.js"
+injection-regex = "^(js|javascript)$"
+file-types = ["js", "jsx", "mjs"]
+shebangs = ["deno", "node"]
+roots = ["deno.json", "deno.jsonc", "package.json", "tsconfig.json"]
+comment-token = "//"
+language-servers = ["deno-lsp"]
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-id = "javascriptreact"
+scope = "source.jsx"
+injection-regex = "jsx"
+file-types = ["jsx"]
+shebangs = ["deno", "node"]
+roots = ["deno.json", "deno.jsonc", "package.json", "tsconfig.json"]
+comment-token = "//"
+language-servers = ["deno-lsp"]
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-id = "typescript"
+scope = "source.ts"
+injection-regex = "^(ts|typescript)$"
+file-types = ["ts"]
+shebangs = ["deno", "node"]
+roots = ["deno.json", "deno.jsonc", "package.json", "tsconfig.json"]
+comment-token = "//"
+language-servers = ["deno-lsp"]
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-id = "typescriptreact"
+scope = "source.tsx"
+injection-regex = "^(tsx)$"                                          
+file-types = ["tsx"]
+shebangs = ["deno", "node"]
+roots = ["deno.json", "deno.jsonc", "package.json", "tsconfig.json"]
+comment-token = "//"
+language-servers = ["deno-lsp"]
+auto-format = true
+
+#roc
+[language-server.roc-ls]
+command = "roc_language_server"
+
+[[language]]
+name = "roc"
+scope = "source.roc"
+injection-regex = "roc"
+file-types = ["roc"]
+shebangs = ["roc"]
+roots = []
+comment-token = "#"
+language-servers = ["roc-ls"]
+indent = { tab-width = 2, unit = "  " }
+auto-format = true
+formatter = { command = "roc", args =[ "format", "--stdin", "--stdout"]}
+
+[[grammar]]
+name = "roc"
+source = { git = "https://github.com/faldor20/tree-sitter-roc.git", rev = "ef46edd0c03ea30a22f7e92bc68628fb7231dc8a" }
+
