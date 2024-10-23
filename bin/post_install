@@ -71,7 +71,6 @@ sccache --start-server
   taplo-cli
   tauri-cli
   leptosfmt
-  cargo-info
   cargo-watch
   cargo-leptos
   create-tauri-app
