@@ -35,25 +35,11 @@ export def main [] {
             event: { send: menuprevious }
         }
         {
-            name: escape
-            modifier: none
-            keycode: escape
-            mode: [vi_normal vi_insert]
-            event: { send: esc }    # NOTE: does not appear to work
-        }
-        {
             name: cancel_command
             modifier: control
             keycode: char_c
             mode: [vi_normal vi_insert]
             event: { send: ctrlc }
-        }
-        {
-            name: quit_shell
-            modifier: control
-            keycode: char_d
-            mode: [vi_normal vi_insert]
-            event: { send: ctrld }
         }
         {
             name: clear_screen
@@ -97,6 +83,13 @@ export def main [] {
                     {send: historyhintwordcomplete}
                 ]
             }
+        }
+        {
+            name: escape
+            modifier: alt
+            keycode: char_i
+            mode: [vi_normal vi_insert]
+            event: { send: esc }    # NOTE: does not appear to work
         }
     ]  
 }

@@ -1,4 +1,3 @@
-
 export def enc [file_name] {
     if ($file_name | str contains 'enc') {
         openssl enc -in $file_name -aes-256-cbc -d out> ($file_name | str replace '.enc' '')
@@ -9,30 +8,24 @@ export def enc [file_name] {
 }
 
 export def ex [file_name : string] {
-  let extensions = [
-      ["extension" "command"];
-      ["tar.bz2"   "tar xjf"]
-      ["tar.gz"    "tar xzf"]
-      ["bz2"       "bunzip2"]
-      ["rar"       "unrar x"]
-      ["gz"        "gunzip"] 
-      ["tar"       "tar xf"] 
-      ["tbz2"      "tar xjf"]
-      ["tgz"       "tar xzf"]
-      ["zip"       "unzip"]
-      ["Z"         "uncompress"]
-      ["7z"        "7z x"] 
-      ["deb"       "ar x"] 
-      ["tar.xz"    "tar xf"] 
-      ["tar.zst"   "tar xf"] 
-    ]
-    let command = $extensions | filter {|x| $file_name | str contains $x.extension} | get command | first
-
-    if $command != null {
-        ^$command $file_name
-    } else {
-        echo "not supported format"
-    }
+    let exten = $file_name | parse "{name}.{exten}" | get exten | first | str trim;
+    match $exten {
+      "tar.bz2" => { tar xjf $file_name }
+      "tar.gz" => { tar xzf $file_name }
+      "tar" => { tar xf $file_name }
+      "tbz2" => { tar xjf $file_name }
+      "tgz" => { tar xzf $file_name }
+      "tar.xz" => { tar xf $file_name }
+      "tar.zst" => { tar xf $file_name }
+      "zip" => { unzip $file_name }
+      "7z" => { 7z x $file_name }
+      "rar" => { unrar x $file_name }
+      "bz2" => { bunzip2 $file_name }
+      "gz" => { gunzip $file_name }
+      "Z" => { uncompress $file_name }
+      "deb" => { ar x $file_name }
+      _ => {print $"not supported extension ($exten)"}
+    };
 }
 
 export def set_volume [vol] {
