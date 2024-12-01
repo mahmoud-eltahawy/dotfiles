@@ -7,23 +7,23 @@ export def enc [file_name] {
     rm $file_name
 }
 
-export def ex [file_name : string] {
-    let exten = $file_name | parse "{name}.{exten}" | get exten | first | str trim;
+export def ex [file_path : path] {
+    let exten = $file_path | path basename | parse "{name}.{exten}" | get exten | first;
     match $exten {
-      "tar.bz2" => { tar xjf $file_name }
-      "tar.gz" => { tar xzf $file_name }
-      "tar" => { tar xf $file_name }
-      "tbz2" => { tar xjf $file_name }
-      "tgz" => { tar xzf $file_name }
-      "tar.xz" => { tar xf $file_name }
-      "tar.zst" => { tar xf $file_name }
-      "zip" => { unzip $file_name }
-      "7z" => { 7z x $file_name }
-      "rar" => { unrar x $file_name }
-      "bz2" => { bunzip2 $file_name }
-      "gz" => { gunzip $file_name }
-      "Z" => { uncompress $file_name }
-      "deb" => { ar x $file_name }
+      "tar.bz2" => { tar xjf $file_path }
+      "tar.gz" => { tar xzf $file_path }
+      "tar" => { tar xf $file_path }
+      "tbz2" => { tar xjf $file_path }
+      "tgz" => { tar xzf $file_path }
+      "tar.xz" => { tar xf $file_path }
+      "tar.zst" => { tar xf $file_path }
+      "zip" => { unzip $file_path }
+      "7z" => { 7z x $file_path }
+      "rar" => { unrar x $file_path }
+      "bz2" => { bunzip2 $file_path }
+      "gz" => { gunzip $file_path }
+      "Z" => { uncompress $file_path }
+      "deb" => { ar x $file_path }
       _ => {print $"not supported extension ($exten)"}
     };
 }
