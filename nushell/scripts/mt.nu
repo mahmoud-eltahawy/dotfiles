@@ -32,19 +32,21 @@ export def set_volume [vol] {
     pactl set-sink-volume 0 $vol;
 }
 
-export def record_screen [target] {
-    ffmpeg -framerate 30 -f x11grab -i :0.0 $"($target).mp4"
+export def record_screen [target = "screen_record"] {
+    wl-screenrec --low-power=off --no-damage -f $"($target).mp4"
 }
 
-export def record_voice [target] {
+export def record_voice [target = "voice_record"] {
     ffmpeg -f alsa -ac 2 -i hw:0 $"($target).mp3"
 }
 
-
-export def record_both [target] {
-    ffmpeg -framerate 30 -f x11grab -i :0.0 -f alsa -ac 2 -i hw:0 $"($target).mp4"
+export def record [target = "record"] {
+    wl-screenrec --low-power=off --no-damage --audio -f $"($target).mp4"
 }
 
+export def camera [] {
+    ffplay -window_title my_camera -vf hflip -fast -noborder -infbuf -loglevel panic -an -x 360 -y 360  /dev/video0
+}
 
 export def wifi_connect [ssid?,password?] {
     if $ssid == null and $password == null {
