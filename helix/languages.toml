@@ -1,4 +1,10 @@
-#python
+[[language]]
+name = "python"
+language-servers = ["pylsp"]
+roots = [".git"]
+workspace-lsp-roots = ["src/updater"]
+auto-format = true
+
 [language-server.pylsp.config.pylsp.plugins]
 flake8 = {enabled = true, ignore = ["E501"]}
 autopep8 = {enabled = false}
@@ -10,22 +16,7 @@ yapf = {enabled = false}
 ruff = { enabled = false}
 
 [[language]]
-name = "python"
-language-servers = ["pylsp"]
-roots = [".git"]
-workspace-lsp-roots = ["src/updater"]
-auto-format = true
+name = "rust"
 
-#leptos server
-[language-server.rust-analyzer]
-config = { 
-  procMacro = { 
-    ignored = { 
-      leptos_macro = [
-        # Optional:
-        # "component",
-        "server"
-      ]
-    }
-  }
-}
+[language-server.rust-analyzer.config.check]
+command = "clippy"
