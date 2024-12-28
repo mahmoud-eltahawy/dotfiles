@@ -1,8 +1,0 @@
-theme=catppuccin-mocha
-initial-command=nu --no-std-lib --config ~/magit/dotfiles/nushell/config.nu --env-config ~/magit/dotfiles/nushell/env.nu
-background-opacity=0.8
-font-size=14
-font-family="fira code"
-copy-on-select=true
-window-decoration=false
-
