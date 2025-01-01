@@ -6,4 +6,5 @@ font-family="fira code"
 copy-on-select=true
 window-decoration=false
 keybind=alt+t=new_tab
+fullscreen=true
 

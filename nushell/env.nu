@@ -38,7 +38,7 @@ $env.PROMPT_COMMAND_RIGHT = {|| create_right_prompt }
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-$env.PROMPT_INDICATOR_VI_INSERT = {|| "↪️ " }
+$env.PROMPT_INDICATOR_VI_INSERT = {|| "-> " }
 $env.PROMPT_INDICATOR_VI_NORMAL = {|| "✎ " }
 $env.PROMPT_MULTILINE_INDICATOR = {|| ": " }
 
@@ -79,5 +79,7 @@ alias q = exit
 def add_path [path : string] {
     $env.PATH = ($env.PATH | split row (char esep) | prepend $path)
 }
+
+fastfetch
 
 #TODO : on setup run (starship init nu | save -f ~/magit/dotfiles/nushell/scripts/starship_init.nu)
