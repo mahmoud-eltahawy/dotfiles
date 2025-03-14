@@ -85,11 +85,11 @@ export def main [] {
             }
         }
         {
-            name: escape
+            name: escape_vi_insert
             modifier: alt
             keycode: char_i
-            mode: [vi_normal vi_insert]
-            event: { send: esc }    # NOTE: does not appear to work
+            mode: [vi_insert]
+            event: { send: Esc }    # NOTE: does not appear to work
         }
     ]  
 }

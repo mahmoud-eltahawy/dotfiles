@@ -1,4 +1,4 @@
-use task.nu;
+# use task.nu;
 use theme.nu;
 use starship_init.nu
 use keybindings.nu
@@ -75,11 +75,6 @@ $env.config = {
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
             completer: null # check 'carapace_completer' above as an example
         }
-    }
-
-    filesize: {
-        metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
-        format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, auto
     }
 
     cursor_shape: {
