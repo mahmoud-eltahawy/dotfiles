@@ -22,6 +22,18 @@ config.default_prog = {
   "--env-config",
   nushell_home .. "/env.nu"
 }
---hello /root
+
+config.keys = {
+  {
+    key = 't',
+    mods = 'META',
+    action = wezterm.action.SpawnTab('CurrentPaneDomain'),
+  },
+  {
+    key = 't',
+    mods = 'META|SHIFT',
+    action = wezterm.action.CloseCurrentTab({confirm = true}),
+  },
+}
 
 return config
