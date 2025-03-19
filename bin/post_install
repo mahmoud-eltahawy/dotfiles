@@ -1,20 +1,14 @@
 #!/usr/bin/env nu
 
 (sudo pacman -Sy --needed
+  lua-language-server
   qt6-wayland
   qt5-wayland
-  webkit2gtk
   base-devel
   curl
   wget
   file
   openssl
-  appmenu-gtk-module
-  gtk3
-  libappindicator-gtk3
-  librsvg
-  libvips
-  go
   sd
   fd
   fzf
@@ -25,32 +19,23 @@
   nerd-fonts
   dosfstools
   tokei
-  firefox
-  'openssl-1.1'
+  librewolf
   wl-clipboard
   cliphist
-  hyprland
-  hyprpaper
-  ghostty
   pueue
-  docker
   grim
   slurp
   ffmpeg
-  nodejs
   nushell
   marksman
   lldb
   gitu
   ntfs-3g
-  thunar
   bemenu-wayland
   mpv
-  pavucontrol
   feh
   sqlx-cli
   btop
-  waybar
   bat
   ripgrep
   wasm-pack
@@ -66,15 +51,12 @@ rustup component add rust-src rust-analyzer
 
 sccache --start-server
 (cargo install
-  irust
   trunk
   bacon
   taplo-cli
-  tauri-cli
   leptosfmt
   cargo-watch
   cargo-leptos
-  create-tauri-app
   joshuto)
 
 
@@ -86,15 +68,7 @@ cd ~
 
 (paru -S --needed
   wl-screenrec
-  all-repository-fonts
-  hyprpicker)
-
-(npm install -g
-  yaml-language-server
-  vscode-langservers-extracted
-  typescript-language-server)
-
-go install github.com/bufbuild/buf-language-server/cmd/bufls@latest
+  all-repository-fonts)
 
 open ~/magit/dotfiles/gitconfig out> ~/.gitconfig
 print 'git configs done. pull git credentials next'

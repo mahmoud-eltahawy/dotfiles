@@ -8,7 +8,6 @@ config.font = wezterm.font "Fira Code"
 config.window_background_opacity = .8
 config.window_decorations = "NONE"
 
-config.color_scheme = 'AdventureTime'
 config.color_scheme = 'GitHub Dark'
 
 config.hide_tab_bar_if_only_one_tab = true
@@ -35,5 +34,13 @@ config.keys = {
     action = wezterm.action.CloseCurrentTab({confirm = true}),
   },
 }
+
+for i = 0,8 do
+  config.keys[#config.keys+1] = {
+    key = tostring(i + 1),
+    mods = 'META',
+    action = wezterm.action.ActivateTab(i),
+  }
+end
 
 return config
