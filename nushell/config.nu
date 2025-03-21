@@ -1,8 +1,7 @@
-# use task.nu;
-use theme.nu;
-use starship_init.nu
-use keybindings.nu
-use mt.nu;
+use "scripts/theme.nu";
+use "scripts/starship_init.nu";
+use "scripts/keybindings.nu";
+use "scripts/mt.nu";
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
