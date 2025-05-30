@@ -67,11 +67,23 @@ $env.NU_PLUGIN_DIRS = [
     "~/magit/dotfiles/nushell/plugins"
 ]
 
-alias fm = joshuto
+def --env fm [...args] {
+	let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+	yazi ...$args --cwd-file $tmp
+	let cwd = (open $tmp)
+	if $cwd != "" and $cwd != $env.PWD {
+		cd $cwd
+	}
+	rm -fp $tmp
+}
+
 alias hx = helix
 alias cat = bat
 alias cloc = tokei
 alias q = exit 
+alias b = job unfreeze 
+alias postman = atac
+alias dbeaver = rainfrog
 
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
@@ -82,4 +94,4 @@ def add_path [path : string] {
 
 fastfetch
 
-#TODO : on setup run (starship init nu | save -f ~/magit/dotfiles/nushell/scripts/starship_init.nu)
+#TODO : on SETUP run (starship init nu | save -f ~/magit/dotfiles/nushell/scripts/starship_init.nu)

@@ -79,6 +79,9 @@ config.colors = {
   },
 }
 
+-- NOTE : sometimes this is required for windows to work
+-- config.prefer_egl = "true"
+
 config.window_decorations = "RESIZE"
 config.window_background_opacity = .8
 

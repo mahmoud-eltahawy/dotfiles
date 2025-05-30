@@ -40,6 +40,12 @@
   sccache
   gitoxide
   fastfetch
+  poppler
+  jq
+  7zip
+  zoxide
+  imagemagick
+  yazi
   dunst)
 
 rustup default stable
@@ -54,7 +60,7 @@ sccache --start-server
   leptosfmt
   cargo-watch
   cargo-leptos
-  joshuto)
+  )
 
 
 cd ~
@@ -64,6 +70,7 @@ makepkg -si
 cd ~
 
 (paru -S --needed
+  resvg
   wl-screenrec
   all-repository-fonts)
 
