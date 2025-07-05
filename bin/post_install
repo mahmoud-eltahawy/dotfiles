@@ -1,7 +1,6 @@
 #!/usr/bin/env nu
 
 (sudo pacman -Sy --needed
-  lua-language-server
   qt6-wayland
   qt5-wayland
   base-devel
@@ -46,7 +45,14 @@
   zoxide
   imagemagick
   yazi
-  dunst)
+  dunst
+  alacritty
+  waybar
+  hyprland
+  hyprpaper
+  hyprpicker
+  thunar
+  pavucontrol)
 
 rustup default stable
 rustup target add wasm32-unknown-unknown

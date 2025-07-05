@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+Hyprland -c ~/magit/dotfiles/hypr/hyprland.conf
