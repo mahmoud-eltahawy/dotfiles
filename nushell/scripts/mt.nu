@@ -8,24 +8,28 @@ export def enc [file_name] {
 }
 
 export def ex [file_path : path] {
-    let exten = $file_path | path basename | parse "{name}.{exten}" | get exten | first;
-    match $exten {
-      "tar.bz2" => { tar xjf $file_path }
-      "tar.gz" => { tar xzf $file_path }
-      "tar" => { tar xf $file_path }
-      "tbz2" => { tar xjf $file_path }
-      "tgz" => { tar xzf $file_path }
-      "tar.xz" => { tar xf $file_path }
-      "tar.zst" => { tar xf $file_path }
-      "zip" => { unzip $file_path }
-      "7z" => { 7z x $file_path }
-      "rar" => { unrar x $file_path }
-      "bz2" => { bunzip2 $file_path }
-      "gz" => { gunzip $file_path }
-      "Z" => { uncompress $file_path }
-      "deb" => { ar x $file_path }
-      _ => {print $"not supported extension ($exten)"}
-    };
+    let basename = $file_path | path basename;
+    let map = [
+        {exten : "tar.bz2",action : {|| tar xjf $file_path }},
+        {exten : "tar.gz",action :  {|| tar xzf $file_path }},
+        {exten : "tar",action :  {|| tar xf $file_path }},
+        {exten : "tbz2",action :  {|| tar xjf $file_path }},
+        {exten : "tgz",action :  {|| tar xzf $file_path }},
+        {exten : "tar.xz",action :  {|| tar xf $file_path }},
+        {exten : "tar.zst",action :  {|| tar xf $file_path }},
+        {exten : "zip",action :  {|| unzip $file_path }},
+        {exten : "7z",action :  {|| 7z x $file_path }},
+        {exten : "rar",action :  {|| unrar x $file_path }},
+        {exten : "bz2",action :  {|| bunzip2 $file_path }},
+        {exten : "gz",action :  {|| gunzip $file_path }},
+        {exten : "Z",action :  {|| uncompress $file_path }},
+        {exten : "deb",action :  {|| ar x $file_path }},
+    ]
+
+    $map | each {|x| if ($basename | str ends-with ($x | get exten)) {
+        let action = $x | get action;
+        do $action;
+    }}
 }
 
 export def set_volume [vol] {
