@@ -31,14 +31,7 @@ family = "firacode"
 style = "Regular"
 
 [terminal.shell]
-program = "nu"
-args = [
-    "--no-std-lib",
-    "--config",
-    "~/magit/dotfiles/nushell/config.nu",
-    "--env-config",
-    "~/magit/dotfiles/nushell/env.nu",
-]
+program = "zellij"
 
 [mouse]
 hide_when_typing = true

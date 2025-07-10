@@ -1,0 +1,179 @@
+keybinds clear-defaults=true {
+    search {
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+        bind "n" { Search "down"; }
+        bind "p" { Search "up"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+    }
+
+    shared_among "scroll" "search" {
+        bind "left" { PageScrollUp; }
+        bind "right" { PageScrollDown; }
+        bind "down" { ScrollDown; }
+        bind "up" { ScrollUp; }
+        bind "j" { ScrollDown; }
+        bind "k" { ScrollUp; }
+        bind "u" { HalfPageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
+        bind "esc" { SwitchToMode "normal"; }
+    }
+
+    entersearch {
+        bind "Ctrl c" { SwitchToMode "scroll"; }
+        bind "esc" { SwitchToMode "scroll"; }
+        bind "enter" { SwitchToMode "search"; }
+    }
+
+    shared {
+        bind "Alt t" { NewTab; }
+        bind "Alt T" { CloseTab; }
+        bind "Alt j" { GoToNextTab; }
+        bind "Alt k" { GoToPreviousTab; }
+        bind "Alt down" { MoveFocus "down"; }
+        bind "Alt up" { MoveFocus "up"; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+        bind "Alt tab" { ToggleTab; }
+        bind "Alt +" { Resize "Increase"; }
+        bind "Alt -" { Resize "Decrease"; }
+        bind "Alt =" { Resize "Increase"; }
+        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt /" { SwitchToMode "entersearch"; SearchInput 0; }
+    }
+}
+
+// Plugin aliases - can be used to change the implementation of Zellij
+// changing these requires a restart to take effect
+plugins {
+    tab-bar location="zellij:tab-bar"
+}
+
+ 
+// Choose the theme that is specified in the themes section.
+// Default: default
+// 
+theme "dracula"
+
+ 
+// Choose the path to the default shell that zellij will use for opening new panes
+// Default: $SHELL
+// 
+default_shell "nu"
+ 
+ 
+// The name of the default layout to load on startup
+// Default: "default"
+// 
+default_layout "compact"
+ 
+// Toggle enabling the mouse mode.
+// On certain configurations, or terminals this could
+// potentially interfere with copying text.
+// Options:
+//   - true (default)
+//   - false
+// 
+mouse_mode false
+ 
+// Toggle having pane frames around the panes
+// Options:
+//   - true (default, enabled)
+//   - false
+// 
+pane_frames false
+ 
+// Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
+// eg. when terminal window with an active zellij session is closed
+// (Requires restart)
+// Options:
+//   - detach (Default)
+//   - quit
+// 
+on_force_close "quit"
+ 
+// Configure the scroll back buffer size
+// This is the number of lines zellij stores for each pane in the scroll back
+// buffer. Excess number of lines are discarded in a FIFO fashion.
+// (Requires restart)
+// Valid values: positive integers
+// Default value: 10000
+scroll_buffer_size 100_000
+ 
+// Provide a command to execute when copying text. The text will be piped to
+// the stdin of the program to perform the copy. This can be used with
+// terminal emulators which do not support the OSC 52 ANSI control sequence
+// that will be used by default if this option is not set.
+// Examples:
+//
+// copy_command "xclip -selection clipboard" // x11
+// copy_command "wl-copy"                    // wayland
+// copy_command "pbcopy"                     // osx
+// 
+// copy_command "pbcopy"
+ 
+// Choose the destination for copied text
+// Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
+// Does not apply when using copy_command.
+// Options:
+//   - system (default)
+//   - primary
+// 
+// copy_clipboard "primary"
+ 
+// Enable automatic copying (and clearing) of selection when releasing mouse
+// Default: true
+// 
+copy_on_select true
+ 
+// Path to the default editor to use to edit pane scrollbuffer
+// Default: $EDITOR or $VISUAL
+// scrollback_editor "/usr/bin/vim"
+ 
+// A fixed name to always give the Zellij session.
+// Consider also setting `attach_to_session true,`
+// otherwise this will error if such a session exists.
+// Default: <RANDOM>
+// 
+session_name "ELTAHAWY"
+ 
+// When `session_name` is provided, attaches to that session
+// if it is already running or creates it otherwise.
+// Default: false
+// 
+attach_to_session true
+ 
+// Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
+// Options:
+//   - true (default)
+//   - false
+// 
+auto_layout false
+ 
+// Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands) so that they can later be resurrected
+// Options:
+//   - true (default)
+//   - false
+// 
+session_serialization false
+ 
+// Whether pane viewports are serialized along with the session, default is false
+// Options:
+//   - true
+//   - false (default)
+// 
+serialize_pane_viewport false
+ 
+// Whether to show tips on startup
+// Default: true
+// 
+show_startup_tips false
+
