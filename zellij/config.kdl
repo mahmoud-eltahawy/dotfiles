@@ -29,8 +29,6 @@ keybinds clear-defaults=true {
     shared {
         bind "Alt t" { NewTab; }
         bind "Alt T" { CloseTab; }
-        bind "Alt j" { GoToNextTab; }
-        bind "Alt k" { GoToPreviousTab; }
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }
         bind "Alt 1" { GoToTab 1; }
@@ -74,15 +72,6 @@ default_shell "nu"
 // Default: "default"
 // 
 default_layout "compact"
- 
-// Toggle enabling the mouse mode.
-// On certain configurations, or terminals this could
-// potentially interfere with copying text.
-// Options:
-//   - true (default)
-//   - false
-// 
-mouse_mode false
  
 // Toggle having pane frames around the panes
 // Options:
