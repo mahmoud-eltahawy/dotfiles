@@ -100,21 +100,11 @@ fn workspace_tags() {
     });
 
     for win in window::get_all() {
-        decorate_window(&win);
+        global_window_settings(&win);
     }
 
     window::add_window_rule(move |win| {
-        match win.app_id().as_str() {
-            TERMINAL | "Mozilla Firefox" => {
-                win.set_maximized(true);
-            }
-            "Picture-in-Picture" => {
-                win.set_floating(true);
-            }
-            _ => (),
-        }
-        win.set_decoration_mode(window::DecorationMode::ServerSide);
-        decorate_window(&win);
+        global_window_settings(&win);
     });
 
     // Enable sloppy focus
@@ -136,7 +126,17 @@ fn workspace_tags() {
     }
 }
 
-fn decorate_window(win: &window::WindowHandle) {
+fn global_window_settings(win: &window::WindowHandle) {
+    win.set_decoration_mode(window::DecorationMode::ServerSide);
+    match win.app_id().as_str() {
+        "Alacritty" | "firefox" => {
+            win.set_maximized(true);
+        }
+        "Picture-in-Picture" => {
+            win.set_floating(true);
+        }
+        _ => (),
+    }
     let mut fb = FocusBorder::new(win);
     fb.focused_color = Color::rgba(153., 255., 119., 0.69);
     fb.thickness = 4;
