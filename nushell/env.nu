@@ -38,6 +38,7 @@ alias cat = bat
 alias cloc = tokei
 alias q = exit 
 alias b = job unfreeze 
+alias ":q" = exit
 # alias postman = atac
 # alias dbeaver = rainfrog
 
