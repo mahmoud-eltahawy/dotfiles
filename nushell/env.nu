@@ -38,13 +38,12 @@ alias cat = bat
 alias cloc = tokei
 alias q = exit 
 alias b = job unfreeze 
+alias cd.. = cd ..
 alias ":q" = exit
+alias ":qw" = exit
 # alias postman = atac
 # alias dbeaver = rainfrog
 
-
-# To add entries to PATH (on Windows you might use Path), you can use the following pattern:
-# $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 def add_path [path : string] {
     $env.PATH = ($env.PATH | split row (char esep) | prepend $path)
 }
