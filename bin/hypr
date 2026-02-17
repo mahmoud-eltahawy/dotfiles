@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-ffplay -f lavfi -i sine=f=440:d=0.6 -autoexit -nodisp &
-start-hyprland -- -c ~/magit/dotfiles/hypr/hyprland.conf
