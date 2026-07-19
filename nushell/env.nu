@@ -39,10 +39,8 @@ alias cloc = tokei
 alias q = exit 
 alias b = job unfreeze 
 alias cd.. = cd ..
-alias ":q" = exit
-alias ":qw" = exit
-# alias postman = atac
-# alias dbeaver = rainfrog
+alias "q" = exit
+alias "qw" = exit
 
 def add_path [path : string] {
     $env.PATH = ($env.PATH | split row (char esep) | prepend $path)

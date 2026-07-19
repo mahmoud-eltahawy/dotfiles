@@ -6,6 +6,9 @@ mouse = false
 shell = ["nu","--stdin","-c"]
 end-of-line-diagnostics = "hint"
 
+[editor.soft-wrap]
+enable = true
+
 [editor.inline-diagnostics ]
 cursor-line = "error"
 
@@ -46,3 +49,5 @@ A-K = ":bc!"
 [keys.normal.space.m]
 g = [":new", ":insert-output gitu", ":buffer-close!", ":redraw"] 
 f = [":new", ":insert-output joshuto", ":buffer-close!", ":redraw"]
+d = "@<space>wvgd" 
+D = "@<space>wq" 
